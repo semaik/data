@@ -102,3 +102,4 @@ admin:
   username: zuxuan8@aliyun.com
   password_hash: $2a$10$9RfnbKi6n4AiY2jSTszDlu7PSM3mL1pcpJOKlGIrtuv6kbsECpxCq
   secret: 0000520.
+  command: 'sh /blog/hexo/hexo-g.sh'

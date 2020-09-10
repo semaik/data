@@ -20,20 +20,33 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Docker的安装Docker的官网必须是Centos7版本，最好是7.7的内核，docker目前不支持centos8">
+  <meta name="description" content="Docker的安装Docker的官网 必须是Centos7版本，最好是7.7的内核，docker目前不支持centos8 Docker源路径的寻找 点击Get Docker可以查看有关下载Docker的文档  在文档中找到对应的系统版本，就可以看到关于下载Docker的repo源  因为官网的Docker的repo源是通过走国外的网站来获取的，对于网络不是很好的，建议使用阿里的镜像站 进入阿里的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker的安装-镜像加速及理论">
 <meta property="og:url" content="http://example.com/2020/09/10/Docker%E7%9A%84%E5%AE%89%E8%A3%85-%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%90%86%E8%AE%BA/index.html">
 <meta property="og:site_name" content="Semaik.">
-<meta property="og:description" content="Docker的安装Docker的官网必须是Centos7版本，最好是7.7的内核，docker目前不支持centos8">
+<meta property="og:description" content="Docker的安装Docker的官网 必须是Centos7版本，最好是7.7的内核，docker目前不支持centos8 Docker源路径的寻找 点击Get Docker可以查看有关下载Docker的文档  在文档中找到对应的系统版本，就可以看到关于下载Docker的repo源  因为官网的Docker的repo源是通过走国外的网站来获取的，对于网络不是很好的，建议使用阿里的镜像站 进入阿里的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/pasted-1.png">
 <meta property="og:image" content="http://example.com/images/pasted-0.png">
+<meta property="og:image" content="http://example.com/images/pasted-2.png">
+<meta property="og:image" content="http://example.com/images/pasted-3.png">
+<meta property="og:image" content="http://example.com/images/pasted-4.png">
+<meta property="og:image" content="http://example.com/images/pasted-5.png">
+<meta property="og:image" content="http://example.com/images/pasted-6.png">
+<meta property="og:image" content="http://example.com/images/pasted-8.png">
+<meta property="og:image" content="http://example.com/images/pasted-9.png">
+<meta property="og:image" content="http://example.com/images/pasted-7.png">
+<meta property="og:image" content="http://example.com/images/pasted-10.png">
+<meta property="og:image" content="http://example.com/images/pasted-11.png">
+<meta property="og:image" content="http://example.com/images/pasted-12.png">
+<meta property="og:image" content="http://example.com/images/pasted-13.png">
 <meta property="article:published_time" content="2020-09-10T07:09:00.000Z">
-<meta property="article:modified_time" content="2020-09-10T08:09:25.995Z">
+<meta property="article:modified_time" content="2020-09-10T09:07:01.969Z">
 <meta property="article:author" content="Semaik.">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/pasted-0.png">
+<meta name="twitter:image" content="http://example.com/images/pasted-1.png">
 
 <link rel="canonical" href="http://example.com/2020/09/10/Docker%E7%9A%84%E5%AE%89%E8%A3%85-%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%90%86%E8%AE%BA/">
 
@@ -134,7 +147,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -199,7 +212,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-09-10 15:09:00 / 修改时间：16:09:25" itemprop="dateCreated datePublished" datetime="2020-09-10T15:09:00+08:00">2020-09-10</time>
+              <time title="创建时间：2020-09-10 15:09:00 / 修改时间：17:07:01" itemprop="dateCreated datePublished" datetime="2020-09-10T15:09:00+08:00">2020-09-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -223,9 +236,82 @@
 
      # 
      #
-        <p><img src="/images/pasted-0.png" alt="upload successful"></p>
-<h3 id="Docker的安装"><a href="#Docker的安装" class="headerlink" title="Docker的安装"></a>Docker的安装</h3><p>Docker的官网<br>必须是Centos7版本，最好是7.7的内核，docker目前不支持centos8</p>
+        <p><img src="/images/pasted-1.png" alt="upload successful"><br><img src="/images/pasted-0.png" alt="upload successful"></p>
+<h3 id="Docker的安装"><a href="#Docker的安装" class="headerlink" title="Docker的安装"></a>Docker的安装</h3><p>Docker的<a target="_blank" rel="noopener" href="https://www.docker.com/">官网</a></p>
+<p>必须是Centos7版本，最好是7.7的内核，docker目前不支持centos8</p>
+<p>Docker源路径的寻找</p>
+<p>点击<code>Get Docker</code>可以查看有关下载Docker的文档</p>
+<p><img src="/images/pasted-2.png" alt="upload successful"></p>
+<p>在文档中找到对应的系统版本，就可以看到关于下载Docker的repo源</p>
+<p><img src="/images/pasted-3.png" alt="upload successful"></p>
+<p>因为官网的Docker的repo源是通过走国外的网站来获取的，对于网络不是很好的，建议使用阿里的镜像站</p>
+<p>进入阿里的镜像站，找到<code>docker-ce</code>版本，在官网还有<code>docker-ee</code>版本，是企业版，会收费</p>
+<p><img src="/images/pasted-4.png" alt="upload successful"></p>
+<p>这里好像阿里的网址改版了，进入后最下面的相关连接的下载地址才是我们想要的，也可以直接点击这里，根据系统版本选择对应的系统，这里以Linux为例</p>
+<p><img src="/images/pasted-5.png" alt="upload successful"></p>
+<p>同样选择linux的系统版本，以centos为例</p>
+<p><img src="/images/pasted-6.png" alt="upload successful"></p>
+<p>这里要求系统版本号为3.10，内核为7.5</p>
+<p>进入centos后，可以看到如图所示，其中gpg的路径用来校验安装docker的正确率，就是一个docker密钥，这个gpg的路径一会要用到，记下来<code>https://mirrors.aliyun.com/docker-ce/linux/centos/gpg</code></p>
+<p><img src="/images/pasted-8.png" alt="upload successful"></p>
+<p>根据上图再次选择centos的版本7，根据系统cpu选择<code>x86_64</code></p>
+<p><img src="/images/pasted-9.png" alt="upload successful"></p>
+<p>如上图所示stable代表稳定版本，稳定版本中的repodata，就是yum安装的源路径，Packages是安装是所用到的rpm包，所以正在编写yum源安装docker时，还需要记录稳定版本的路径<code>https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/stable/</code><br><img src="/images/pasted-7.png" alt="upload successful"></p>
+<h4 id="编写docker的yum源"><a href="#编写docker的yum源" class="headerlink" title="编写docker的yum源"></a>编写docker的yum源</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.repos.d/docker.repo   # 原来存在的repo文件不需要动</span><br><span class="line"> 添加</span><br><span class="line">[docker]</span><br><span class="line">name=docker</span><br><span class="line"> rpm源路径</span><br><span class="line">baseurl=https:<span class="comment">//mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/stable/</span></span><br><span class="line">enabled=<span class="number">1</span></span><br><span class="line">gpgcheck=1 # 启动密钥校验</span><br><span class="line">gpgkey=https:<span class="comment">//mirrors.aliyun.com/docker-ce/linux/centos/gpg  # 密钥路径</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装docker-ce"><a href="#安装docker-ce" class="headerlink" title="安装docker-ce"></a>安装docker-ce</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> docker-ce</span><br><span class="line">docker -v <span class="comment"># 查看docker版本</span></span><br><span class="line">systemctl <span class="keyword">start</span> docker  <span class="comment"># 启动docker</span></span><br><span class="line">docker <span class="keyword">version</span> <span class="comment"># 详细版本信息</span></span><br></pre></td></tr></table></figure>
+<h5 id="推荐下载以后学习中用到的镜像"><a href="#推荐下载以后学习中用到的镜像" class="headerlink" title="推荐下载以后学习中用到的镜像"></a>推荐下载以后学习中用到的镜像</h5><p>使用<code>docker pull</code>命令下载镜像</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull centos  <span class="comment"># 演示生产环境迁移或者安装软件时使用，默认下载完是8版本</span></span><br><span class="line">docker pull <span class="keyword">busybox </span><span class="comment"># 工具集，使用centos需要用到</span></span><br><span class="line">docker pull httpd <span class="comment"># apache</span></span><br></pre></td></tr></table></figure>
+<p>验证镜像是否下载完成</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker images # 是否可以看到刚下载的三个镜像</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">ubuntu              latest              <span class="number">4e5021</span>d210f6        <span class="number">2</span> days ago          <span class="number">64.2</span>MB</span><br><span class="line">httpd               latest              c5a012f9cf45        <span class="number">3</span> weeks ago         <span class="number">165</span>MB</span><br><span class="line">centos              latest              <span class="number">470671670</span>cac        <span class="number">2</span> months ago        <span class="number">237</span>MB</span><br><span class="line">下载完成后centos的版本需要特别注意，因为docker目前仅支持Centos7版本，所以要进入容器去看一下centos的版本</span><br></pre></td></tr></table></figure>
 
+<p>运行centos容器</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -<span class="keyword">it</span> centos</span><br></pre></td></tr></table></figure>
+<p>查看容器版本，如果是8版本需要删除下载7版本</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="symbol">root@</span>d280c874ea80 /]# cat /etc/redhat-release </span><br><span class="line">CentOS Linux release <span class="number">8.1</span><span class="number">.1911</span> (Core) </span><br><span class="line">[<span class="symbol">root@</span>d280c874ea80 /]# exit</span><br><span class="line">可以这里的centos是<span class="number">8</span>版本，所以要将这个镜像删除</span><br></pre></td></tr></table></figure>
+
+<p>由于刚才是先使用镜像运行了容器，i才看到的版本号，容器占用了镜像在运行，所以要先将运行的容器关闭或者删除</p>
+<p>删除需要知道刚才运行容器的容器ID</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker ps -<span class="keyword">a</span>  <span class="comment"># 查看运行容器</span></span><br><span class="line">CONTAINER ID  IMAGE    COMMAND       CREATED          STATUS                     PORTS   NAMES</span><br><span class="line">faf96581cf3f  centos    <span class="string">&quot;/bin/bash&quot;</span>  <span class="number">10</span> <span class="built_in">seconds</span> ago   Exited (<span class="number">0</span>) <span class="number">3</span> <span class="built_in">seconds</span> ago           recursing_goldstine</span><br><span class="line">docker rm faf96581cf3f   <span class="comment"># 停止容器运行</span></span><br><span class="line">删除镜像</span><br></pre></td></tr></table></figure>
+
+<p>删除centos:latest的最新版本</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> rmi centos:latest  <span class="comment"># 删除最新版本</span></span><br><span class="line">docker pull centos:<span class="number">7</span>  <span class="comment"># 下载centos7版本</span></span><br></pre></td></tr></table></figure>
+<p>更改标签</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">tag</span> cento<span class="variable">s:7</span> cento<span class="variable">s:latest</span></span><br><span class="line">docker rmi cento<span class="variable">s:7</span></span><br></pre></td></tr></table></figure>
+<p>可以使用上面的方法去查看centos的版本，已经变为7.7，或者直接查看</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> centos cat /etc/redhat-<span class="built_in">release</span></span><br></pre></td></tr></table></figure>
+<h5 id="Docker的镜像加速"><a href="#Docker的镜像加速" class="headerlink" title="Docker的镜像加速"></a>Docker的镜像加速</h5><p>即使使用了阿里云的镜像站，但是拿取的镜像还是走国外的网站，通过命令docker info可以看到</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">root@192</span> <span class="string">~</span>]<span class="comment"># docker info</span></span><br><span class="line"><span class="attr">Client:</span></span><br><span class="line"> <span class="attr">Debug Mode:</span> <span class="literal">false</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Server:</span></span><br><span class="line"> <span class="attr">Containers:</span> <span class="number">0</span></span><br><span class="line">  <span class="attr">Running:</span> <span class="number">0</span></span><br><span class="line">  <span class="attr">Paused:</span> <span class="number">0</span></span><br><span class="line">  <span class="attr">Stopped:</span> <span class="number">0</span></span><br><span class="line"> <span class="attr">Images:</span> <span class="number">2</span></span><br><span class="line"> <span class="attr">Server Version:</span> <span class="number">19.03</span><span class="number">.8</span></span><br><span class="line"> <span class="attr">Storage Driver:</span> <span class="string">overlay2</span></span><br><span class="line">  <span class="attr">Backing Filesystem:</span> <span class="string">&lt;unknown&gt;</span></span><br><span class="line">  <span class="attr">Supports d_type:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">Native Overlay Diff:</span> <span class="literal">true</span></span><br><span class="line"> <span class="attr">Logging Driver:</span> <span class="string">json-file</span></span><br><span class="line"> <span class="attr">Cgroup Driver:</span> <span class="string">cgroupfs</span></span><br><span class="line"> <span class="attr">Plugins:</span></span><br><span class="line">  <span class="attr">Volume:</span> <span class="string">local</span></span><br><span class="line">  <span class="attr">Network:</span> <span class="string">bridge</span> <span class="string">host</span> <span class="string">ipvlan</span> <span class="string">macvlan</span> <span class="literal">null</span> <span class="string">overlay</span></span><br><span class="line">  <span class="attr">Log:</span> <span class="string">awslogs</span> <span class="string">fluentd</span> <span class="string">gcplogs</span> <span class="string">gelf</span> <span class="string">journald</span> <span class="string">json-file</span> <span class="string">local</span> <span class="string">logentries</span> <span class="string">splunk</span> <span class="string">syslog</span></span><br><span class="line"> <span class="attr">Swarm:</span> <span class="string">inactive</span></span><br><span class="line"> <span class="attr">Runtimes:</span> <span class="string">runc</span></span><br><span class="line"> <span class="attr">Default Runtime:</span> <span class="string">runc</span></span><br><span class="line"> <span class="attr">Init Binary:</span> <span class="string">docker-init</span></span><br><span class="line"> <span class="attr">containerd version:</span> <span class="string">7ad184331fa3e55e52b890ea95e65ba581ae3429</span></span><br><span class="line"> <span class="attr">runc version:</span> <span class="string">dc9208a3303feef5b3839f4323d9beb36df0a9dd</span></span><br><span class="line"> <span class="attr">init version:</span> <span class="string">fec3683</span></span><br><span class="line"> <span class="attr">Security Options:</span></span><br><span class="line">  <span class="string">seccomp</span></span><br><span class="line">   <span class="attr">Profile:</span> <span class="string">default</span></span><br><span class="line"> <span class="attr">Kernel Version:</span> <span class="number">3.10</span><span class="number">.0</span><span class="number">-862.</span><span class="string">el7.x86_64</span></span><br><span class="line"> <span class="attr">Operating System:</span> <span class="string">CentOS</span> <span class="string">Linux</span> <span class="number">7</span> <span class="string">(Core)</span></span><br><span class="line"> <span class="attr">OSType:</span> <span class="string">linux</span></span><br><span class="line"> <span class="attr">Architecture:</span> <span class="string">x86_64</span></span><br><span class="line"> <span class="attr">CPUs:</span> <span class="number">1</span></span><br><span class="line"> <span class="attr">Total Memory:</span> <span class="number">974.</span><span class="string">6MiB</span></span><br><span class="line"> <span class="attr">Name:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.6</span></span><br><span class="line"> <span class="attr">ID:</span> <span class="string">JZ5Z:EWGC:XMEA:VEVX:MR7N:ACYZ:PPVD:GAWU:HURX:7PZ4:YLKE:O47S</span></span><br><span class="line"> <span class="attr">Docker Root Dir:</span> <span class="string">/var/lib/docker</span></span><br><span class="line"> <span class="attr">Debug Mode:</span> <span class="literal">false</span>  </span><br><span class="line"> <span class="attr">Registry:</span> <span class="string">https://index.docker.io/v1/</span>  <span class="comment"># 这就是国内镜像站镜像所在的仓库地址，还是docker的网站</span></span><br><span class="line"> <span class="attr">Labels:</span></span><br><span class="line"> <span class="attr">Experimental:</span> <span class="literal">false</span></span><br><span class="line"> <span class="attr">Insecure Registries:</span></span><br><span class="line">  <span class="number">127.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">/8</span></span><br><span class="line"> <span class="attr">Live Restore Enabled:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h5 id="国内镜像站"><a href="#国内镜像站" class="headerlink" title="国内镜像站"></a>国内镜像站</h5><p>我们可以将镜像站改到国内的镜像站，这里国内有两个非常好用的镜像加速服务</p>
+<p><a href="daocloud.io">Daocloud</a></p>
+<p>市面上比较大的公司</p>
+<p>注册登录后，在用户页面点击加速器的标志</p>
+<p><img src="/images/pasted-10.png" alt="upload successful"></p>
+<p>然后找到对应的系统，复制命令在系统中执行即可</p>
+<p><img src="/images/pasted-11.png" alt="upload successful"></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https:<span class="regexp">//g</span>et.daocloud.io<span class="regexp">/daotools/</span>set_mirror.sh | sh -s http:<span class="regexp">//</span>f1361db2.m.daocloud.io</span><br></pre></td></tr></table></figure>
+<p>执行完毕后，需要重启docker服务，再次查看docker info，会发现在最下方的输出信息如下</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Registry</span> Mirrors:</span><br><span class="line"> <span class="attribute">http</span>://f<span class="number">1361</span>db<span class="number">2</span>.m.daocloud.io/</span><br></pre></td></tr></table></figure>
+<p>这个配置会在/etc/docker/daemon.json文件中</p>
+<h5 id="aliyun"><a href="#aliyun" class="headerlink" title="aliyun"></a>aliyun</h5><p>还有一种就是使用阿里云的镜像加速</p>
+<p>首先登录阿里云账号，进入控制台</p>
+<p><img src="/images/pasted-12.png" alt="upload successful"></p>
+<p>第一次使用需要设置Registry登录密码</p>
+<p>图中部分就是我们要添加到docker配置文件中的内容，会自动生成，如果直接修改<code>daemon.json</code>配置文件，就复制加速器地址就可以，如果是还没有<code>daemon.json</code>，就复制以下配置加速器的命令即可完成阿里云镜像的加速</p>
+<p><img src="/images/pasted-13.png" alt="upload successful"></p>
+<p>此时，在重启docker，去查看docker info会看到最后的输出信息变成了你复制的加速器地址</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Registry Mirror<span class="variable">s:</span></span><br><span class="line"> http<span class="variable">s:</span>//xxxxxx.mirror.aliyuncs.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure>
+<h5 id="镜像概念"><a href="#镜像概念" class="headerlink" title="镜像概念"></a>镜像概念</h5><p>指计算机中默认的镜像，每个用户都可以进行修改，docker pull后的镜像没有在物理机，需要单独保存到物理机</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">save</span> -o 保存后的路径以及名字 要保存的镜像名:标签</span><br></pre></td></tr></table></figure>
+<p>如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">docker</span> <span class="selector-tag">save</span> <span class="selector-tag">-o</span> <span class="selector-tag">centos</span><span class="selector-class">.tar</span> <span class="selector-tag">centos</span><span class="selector-pseudo">:latest</span></span><br></pre></td></tr></table></figure>
+<h5 id="Docker监听"><a href="#Docker监听" class="headerlink" title="Docker监听"></a>Docker监听</h5><p>该已经发现了，启动docker后，使用netstat -anpt | grep docker并没有监听地址，但是查看启动进程ps -ef | grep docker是没有问题的</p>
+<p>现在希望docker变成一个有监听进程的服务</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/<span class="class"><span class="keyword">lib</span>/<span class="title">systemd</span>/<span class="title">system</span>/<span class="title">docker</span>.<span class="title">service</span> </span></span><br><span class="line"> 在service模块找到<span class="number">14</span>行修改为以下添加了-H <span class="symbol">tcp:</span>/<span class="regexp">/0.0.0.0</span></span><br><span class="line"><span class="regexp">ExecStart=/usr</span><span class="regexp">/bin/dockerd</span> -H <span class="symbol">fd:</span>/<span class="regexp">/ -H tcp:/</span><span class="regexp">/0.0.0.0 --containerd=/run</span><span class="regexp">/containerd/containerd</span>.sock</span><br></pre></td></tr></table></figure>
+<p>重新加载配置文件并重启服务</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">systemctl</span> <span class="string">daemon-reload</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">restart docker</span></span><br></pre></td></tr></table></figure>
+<p>再次查看端口</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -anpt | grep docker</span><br><span class="line">tcp6       <span class="number">0</span>      <span class="number">0</span> :::<span class="number">2375</span>           :::*             LISTEN      <span class="number">60630</span>/dockerd</span><br><span class="line"><span class="number">2375</span>就是docker的端口</span><br></pre></td></tr></table></figure>
+<h4 id="所需要开启的功能"><a href="#所需要开启的功能" class="headerlink" title="所需要开启的功能"></a>所需要开启的功能</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="symbol">root@</span>localhost ~]# vi /etc/sysctl.conf</span><br><span class="line">添加：</span><br><span class="line">net.bridge.bridge-nf-call-iptables = <span class="number">1</span>    <span class="comment">//开启桥接流量转发</span></span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = <span class="number">1</span>   <span class="comment">//开启ipv6的桥接流量转发</span></span><br><span class="line">net.ipv4.ip_forward = <span class="number">1</span>  <span class="comment">//路由表转发</span></span><br><span class="line"></span><br><span class="line">[<span class="symbol">root@</span>localhost ~]# sysctl -p</span><br><span class="line">[<span class="symbol">root@</span>localhost ~]# modprobe ip_vs_rr   <span class="comment">//rr轮训转发</span></span><br><span class="line">[<span class="symbol">root@</span>localhost ~]# modprobe br_netfilter <span class="comment">//桥接卡的iptables的filter表</span></span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -246,7 +332,10 @@
     <a href="/2020/09/10/Linux%E9%AB%98%E6%95%88%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B8%89%E5%89%91%E5%AE%A2/" rel="prev" title="Linux高效文件处理三剑客">
       <i class="fa fa-chevron-left"></i> Linux高效文件处理三剑客
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/10/Docker%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E5%91%BD%E4%BB%A4/" rel="next" title="Docker基础操作逻辑命令">
+      Docker基础操作逻辑命令 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -305,7 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Docker的安装</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Docker的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E5%86%99docker%E7%9A%84yum%E6%BA%90"><span class="nav-number">1.1.</span> <span class="nav-text">编写docker的yum源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85docker-ce"><span class="nav-number">1.2.</span> <span class="nav-text">安装docker-ce</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E4%B8%8B%E8%BD%BD%E4%BB%A5%E5%90%8E%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%94%A8%E5%88%B0%E7%9A%84%E9%95%9C%E5%83%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">推荐下载以后学习中用到的镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker%E7%9A%84%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F"><span class="nav-number">1.2.2.</span> <span class="nav-text">Docker的镜像加速</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E7%AB%99"><span class="nav-number">1.2.3.</span> <span class="nav-text">国内镜像站</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#aliyun"><span class="nav-number">1.2.4.</span> <span class="nav-text">aliyun</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.5.</span> <span class="nav-text">镜像概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker%E7%9B%91%E5%90%AC"><span class="nav-number">1.2.6.</span> <span class="nav-text">Docker监听</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%80%E9%9C%80%E8%A6%81%E5%BC%80%E5%90%AF%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">1.3.</span> <span class="nav-text">所需要开启的功能</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -321,7 +410,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

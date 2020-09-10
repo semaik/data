@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="镜像小的原因：Linux操作系统两个部分构成内核空间（kernel）、用户空间（rootfs） 查看docker的基础信息 docker info 查看docker中已经存在的镜像 123456docker images参数：	-a：列出本地所有的镜像（含中间映像层）	-q：只显示镜像id	--digests：显示镜像的摘要信息	--no-trunc：显示完整的镜像信息    在docker h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker基础操作逻辑命令">
+<meta property="og:url" content="http://example.com/2020/09/10/Docker%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Semaik.">
+<meta property="og:description" content="镜像小的原因：Linux操作系统两个部分构成内核空间（kernel）、用户空间（rootfs） 查看docker的基础信息 docker info 查看docker中已经存在的镜像 123456docker images参数：	-a：列出本地所有的镜像（含中间映像层）	-q：只显示镜像id	--digests：显示镜像的摘要信息	--no-trunc：显示完整的镜像信息    在docker h">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/pasted-15.png">
+<meta property="og:image" content="http://example.com/images/pasted-16.png">
+<meta property="og:image" content="http://example.com/images/pasted-17.png">
+<meta property="og:image" content="http://example.com/images/pasted-18.png">
+<meta property="og:image" content="http://example.com/images/pasted-19.png">
+<meta property="article:published_time" content="2020-09-10T09:08:00.000Z">
+<meta property="article:modified_time" content="2020-09-10T09:28:29.395Z">
+<meta property="article:author" content="Semaik.">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/pasted-15.png">
+
+<link rel="canonical" href="http://example.com/2020/09/10/Docker%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E5%91%BD%E4%BB%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Docker基础操作逻辑命令 | Semaik.</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Semaik." type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Semaik.</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/10/Docker%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Semaik.">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Semaik.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker基础操作逻辑命令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-10 17:08:00 / 修改时间：17:28:29" itemprop="dateCreated datePublished" datetime="2020-09-10T17:08:00+08:00">2020-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+     # 
+     #
+        <p><img src="/images/pasted-15.png" alt="upload successful"></p>
+<p>镜像小的原因：<br>Linux操作系统两个部分构成内核空间（kernel）、用户空间（rootfs）</p>
+<p>查看docker的基础信息</p>
+<p><code>docker info</code></p>
+<p>查看docker中已经存在的镜像</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br><span class="line">参数：</span><br><span class="line">	-<span class="ruby">a：列出本地所有的镜像（含中间映像层）</span></span><br><span class="line"><span class="ruby">	-q：只显示镜像id</span></span><br><span class="line"><span class="ruby">	--digests：显示镜像的摘要信息</span></span><br><span class="line"><span class="ruby">	--no-trunc：显示完整的镜像信息</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在docker hub中查看关于该镜像的所有镜像</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">search</span></span><br><span class="line">例：</span><br><span class="line">docker <span class="built_in">search</span> ubuntu # 全网搜索ubuntu镜像</span><br></pre></td></tr></table></figure>
+
+<p>下载镜像</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> pull 镜像名   //默认下载tomcat:latest，意思是最新版，或者tomcat:<span class="number">3</span>.<span class="number">2</span>  下载<span class="number">3</span>.<span class="number">2</span>版本</span><br></pre></td></tr></table></figure>
+
+<p>删除镜像</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker rmi 镜像名： 删除镜像，默认删除 镜像名:latest，这个镜像不能在运行中</span><br><span class="line">docker rmi <span class="operator">-f</span> 镜像名：强制删除</span><br><span class="line">docker rmi <span class="operator">-f</span> <span class="variable">$</span>（docker images <span class="literal">-qa</span>）：删除全部镜像</span><br></pre></td></tr></table></figure>
+<p>导出镜像</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">docker</span> <span class="selector-tag">save</span> <span class="selector-tag">-o</span> 压缩包名称 镜像名称</span><br><span class="line">例：将镜像导出当前目录下</span><br><span class="line"><span class="selector-tag">docker</span> <span class="selector-tag">save</span> <span class="selector-tag">-o</span> <span class="selector-tag">centos</span><span class="selector-class">.tar</span> <span class="selector-tag">centos</span><span class="selector-pseudo">:latest</span></span><br><span class="line">将镜像<span class="selector-tag">centos</span><span class="selector-pseudo">:latest</span>另存到虚拟机当前目录下，命名为<span class="selector-tag">centos</span><span class="selector-class">.tar</span></span><br></pre></td></tr></table></figure>
+
+<p>导入镜像</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">docker</span> <span class="selector-tag">load</span> &lt; <span class="selector-tag">centos</span><span class="selector-class">.tar</span></span><br></pre></td></tr></table></figure>
+<p>重命名镜像名称</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">tag</span> <span class="title">旧镜像名称 新镜像名称</span></span><br><span class="line"><span class="title">例：</span></span><br><span class="line"><span class="title">docker</span> <span class="keyword">tag</span> <span class="title">500b941e6f79</span> tomcat7:jre7</span><br></pre></td></tr></table></figure>
+<p>创建不运行容器</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">create</span> <span class="comment">--name web httpd</span></span><br></pre></td></tr></table></figure>
+<p>创建并运行容器</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd -p 88:80--name test --restart always centos:7 /bin/bash</span><br><span class="line">可用docker ps -a，查看容器运行状态</span><br><span class="line">参数：</span><br><span class="line">    -<span class="ruby">i  以交互方式登录</span></span><br><span class="line"><span class="ruby">    -t  允许以交互方式打开终端</span></span><br><span class="line"><span class="ruby">    -d  在后台运行</span></span><br><span class="line"><span class="ruby">    -p  映射端口，将容器中的<span class="number">80</span>端口映射成物理机中的<span class="number">88</span>端口</span></span><br><span class="line"><span class="ruby">    --name  添加容器名</span></span><br><span class="line"><span class="ruby">    --restart always  跟随docker启动而启动，就是当服务重启时、启动时，该容器也会运行</span></span><br><span class="line"><span class="ruby">    --rm  容器一旦停止就会被自动删除，不添加的话容器会永久保存在计算机中</span></span><br><span class="line"><span class="ruby">    --privileged  添加特权，不添加此参数 运行一些系统命令时错</span></span><br></pre></td></tr></table></figure>
+<p>查看所有容器</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker ps -a</span></span><br></pre></td></tr></table></figure>
+<p>立马强制性退出容器</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">kill</span> 容器<span class="keyword">id</span></span><br></pre></td></tr></table></figure>
+<p>停止容器</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">stop</span> 容器<span class="keyword">id</span></span><br></pre></td></tr></table></figure>
+<p>启动容器</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">start</span> 容器<span class="keyword">id</span></span><br></pre></td></tr></table></figure>
+<p>进入容器</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -<span class="keyword">it</span> 容器<span class="built_in">id</span> /bin/bash</span><br></pre></td></tr></table></figure>
+<p>挂起容器</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pause 容器<span class="built_in">id</span></span><br></pre></td></tr></table></figure>
+<p>取消挂起正常运行容器</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker unpause 容器<span class="built_in">id</span></span><br></pre></td></tr></table></figure>
+<p>删除容器：（删除容器前需要停止容器）</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">rm</span> 容器id</span><br><span class="line">如：容器正在运行中需要删除容器，就需要添加参数<span class="operator">-f</span></span><br><span class="line">docker <span class="built_in">rm</span> <span class="operator">-f</span> 容器id</span><br></pre></td></tr></table></figure>
+<p>查看容器信息</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器<span class="built_in">id</span></span><br></pre></td></tr></table></figure>
+<p>编写进入容器脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/bin/docker-enter</span><br><span class="line">!/bin/sh</span><br><span class="line"><span class="keyword">if</span> [ -e $(dirname <span class="string">&quot;<span class="variable">$0</span>&quot;</span>)/nsenter ]; <span class="keyword">then</span></span><br><span class="line"> with boot2docker, nsenter is not <span class="keyword">in</span> the PATH but it is <span class="keyword">in</span> the same folder</span><br><span class="line">  NSENTER=$(dirname <span class="string">&quot;<span class="variable">$0</span>&quot;</span>)/nsenter</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  NSENTER=nsenter</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$1</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Usage: `basename &quot;</span><span class="variable">$0</span><span class="string">&quot;` CONTAINER [COMMAND [ARG]...]&quot;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Enters the Docker CONTAINER and executes the specified COMMAND.&quot;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;If COMMAND is not specified, runs an interactive shell in CONTAINER.&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  PID=$(docker inspect --format <span class="string">&quot;&#123;&#123;.State.Pid&#125;&#125;&quot;</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$PID</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="built_in">shift</span></span><br><span class="line">  OPTS=<span class="string">&quot;--target <span class="variable">$PID</span> --mount --uts --ipc --net --pid --&quot;</span></span><br><span class="line">  <span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$1</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># No command given.</span></span><br><span class="line">    <span class="comment"># Use su to clear all host environment variables except for TERM,</span></span><br><span class="line">    <span class="comment"># initialize the environment variables HOME, SHELL, USER, LOGNAME, PATH,</span></span><br><span class="line">    <span class="comment"># and start a login shell.</span></span><br><span class="line">    <span class="string">&quot;<span class="variable">$NSENTER</span>&quot;</span> <span class="variable">$OPTS</span> su - root</span><br><span class="line"> <span class="keyword">else</span></span><br><span class="line">    <span class="comment"># Use env to clear all host environment variables.</span></span><br><span class="line">    <span class="string">&quot;<span class="variable">$NSENTER</span>&quot;</span> <span class="variable">$OPTS</span> env --ignore-environment -- <span class="string">&quot;<span class="variable">$@</span>&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>给予权限</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x <span class="regexp">/usr/</span>bin/docker-enter</span><br></pre></td></tr></table></figure>
+<p>可以使用该脚本，加容器name或者容器id来启动容器</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-enter 容器<span class="built_in">id</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h5 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h5><p>虚拟机版本低于7.7，进如容器后无法使用网络，因为默认是关闭路由转发的，需要手动开启。<br>退出容器在宿主机执行以下操作：<br>echo “net.ipv4.ip_forward=1” &gt;&gt; /etc/sysctl.conf<br>sysctl -p</p>
+<h5 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h5><p>进入任何一个容器中，所有命令不可以使用，环境比脸都干净，需要自己手动安装命令。<br>如果想使用某一条命令就执行 yum provides 命令  该命令搜查出命令对应的安装包，安装成功后命令即可使用。</p>
+<p>如：<br>我想使用ifcofnig这条命令查看IP地址<br>安装前执行命令（报错：没有该命令）</p>
+<p><img src="/images/pasted-16.png" alt="upload successful"></p>
+<p>搜查命令对应的软件包</p>
+<p><img src="/images/pasted-17.png" alt="upload successful"><br>安装软件包</p>
+<p><img src="/images/pasted-18.png" alt="upload successful"><br>测试</p>
+<p><img src="/images/pasted-19.png" alt="upload successful"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/10/Docker%E7%9A%84%E5%AE%89%E8%A3%85-%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%90%86%E8%AE%BA/" rel="prev" title="Docker的安装-镜像加速及理论">
+      <i class="fa fa-chevron-left"></i> Docker的安装-镜像加速及理论
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/10/Docker%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/" rel="next" title="Docker私有仓库">
+      Docker私有仓库 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">补充：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">提示：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Semaik."
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Semaik.</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/semaik" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;semaik" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zuxuan8@aliyun.com" title="E-Mail → mailto:zuxuan8@aliyun.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Semaik.</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
