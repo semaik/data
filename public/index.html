@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Semaik.">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Semaik.">
+<meta property="og:description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Semaik.">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Semaik.</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Semaik." type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Semaik.</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/10/Docker%E7%9A%84%E5%AE%89%E8%A3%85-%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%90%86%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Semaik.">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Semaik.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/10/Docker%E7%9A%84%E5%AE%89%E8%A3%85-%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%90%86%E8%AE%BA/" class="post-title-link" itemprop="url">Docker的安装-镜像加速及理论</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-10 15:09:00 / 修改时间：16:09:25" itemprop="dateCreated datePublished" datetime="2020-09-10T15:09:00+08:00">2020-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+     # 
+     #
+          <p><img src="/images/pasted-0.png" alt="upload successful"></p>
+<h3 id="Docker的安装"><a href="#Docker的安装" class="headerlink" title="Docker的安装"></a>Docker的安装</h3><p>Docker的官网<br>必须是Centos7版本，最好是7.7的内核，docker目前不支持centos8</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/10/Linux%E9%AB%98%E6%95%88%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B8%89%E5%89%91%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Semaik.">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Semaik.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/10/Linux%E9%AB%98%E6%95%88%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B8%89%E5%89%91%E5%AE%A2/" class="post-title-link" itemprop="url">Linux高效文件处理三剑客</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-10 14:39:48 / 修改时间：15:00:45" itemprop="dateCreated datePublished" datetime="2020-09-10T14:39:48+08:00">2020-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+     # 
+     #
+          <blockquote>
+<p>grep、sed、awk我们叫他们三剑客，掌握它们可以更好的运维，提升工作效率，即使不是运维，对我们处理数据都是非常方便的～就很多数据处理来讲，写程序肯定是也能处理的，但是远没有已经存在特定功能的命令更高效，我们只需要操作命令即可。通过本文可以讲解三剑客的一些基础知识和实用;</p>
+</blockquote>
+<h3 id="Grep"><a href="#Grep" class="headerlink" title="Grep"></a>Grep</h3><p>简介<br>grep是一款强大的文本搜索工具，支持正则表达式。<br>全称（ global search regular expression(RE) and print out the line）<br>语法:grep [option]… PATTERN [FILE]…<br>常用:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">usage: grep [-abcDEFGHhIiJLlmnOoqRSsUVvwxZ] [-A num] [-B num] [-C[num]]</span><br><span class="line"> [-e pattern] [-f file] [--binary-files=value] [--color=when]</span><br><span class="line"> [--context[=num]] [--directories=action] [--label] [--line-buffered]</span><br><span class="line"> [--<span class="keyword">null</span>] [pattern] [file ...]</span><br></pre></td></tr></table></figure>
+<p>常用参数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-v        取反</span><br><span class="line">-i        忽略大小写</span><br><span class="line">-c        符合条件的行数</span><br><span class="line">-n        输出的同时打印行号</span><br><span class="line">^*        以*开头         </span><br><span class="line">*$         以*结尾 </span><br><span class="line">^$         空行 </span><br></pre></td></tr></table></figure>
+<p>实际使用<br>准备好一个小故事txt：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@iz2ze76ybn73dvwmdij06zz ~]# cat monkey</span><br><span class="line">One day,a little monkey is playing by the well.一天,有只小猴子在井边玩儿.</span><br><span class="line">He looks in the well and shouts :它往井里一瞧,高喊道：</span><br><span class="line">“Oh!My god!The moon has fallen into the well!” “噢!我的天!月亮掉到井里头啦!”</span><br><span class="line">An older monkeys runs over,takes a look,and says,一只大猴子跑来一看,说,</span><br><span class="line">“Goodness me!The moon is really in the water!” “糟啦!月亮掉在井里头啦!”</span><br><span class="line">And olderly monkey comes over.老猴子也跑过来.</span><br><span class="line">He is very surprised as well and cries out:他也非常惊奇,喊道：</span><br><span class="line">“The moon is in the well.” “糟了,月亮掉在井里头了!”</span><br><span class="line">A group of monkeys run over to the well .一群猴子跑到井边来,</span><br><span class="line">They look at the moon in the well and shout:他们看到井里的月亮,喊道：</span><br><span class="line">“The moon did fall into the well!Come on!Let’get it out!”</span><br><span class="line">“月亮掉在井里头啦!快来!让我们把它捞起来!”</span><br><span class="line">Then,the oldest monkey hangs on the tree up side down ,with his feet on the branch .</span><br><span class="line">然后,老猴子倒挂在大树上,</span><br><span class="line">And he pulls the next monkey’s feet with his hands.拉住大猴子的脚,</span><br><span class="line">All the other monkeys follow his suit,其他的猴子一个个跟着,</span><br><span class="line">And they join each other one by one down to the moon in the well.</span><br><span class="line">它们一只连着一只直到井里.</span><br><span class="line">Just before they reach the moon,the oldest monkey raises his head and happens to see the moon in the sky,正好他们摸到月亮的时候,老猴子抬头发现月亮挂在天上呢</span><br><span class="line">He yells excitedly “Don’t be so foolish!The moon is still in the sky!”</span><br><span class="line">它兴奋地大叫：“别蠢了!月亮还好好地挂在天上呢!</span><br></pre></td></tr></table></figure>
+<h4 id="直接查找符合条件的行"><a href="#直接查找符合条件的行" class="headerlink" title="直接查找符合条件的行"></a>直接查找符合条件的行</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@iz2ze76ybn73dvwmdij06zz ~]# grep moon monkey</span><br><span class="line">“Oh!My god!The moon has fallen into the well!” “噢!我的天!月亮掉到井里头啦!”</span><br><span class="line">“Goodness me!The moon is really in the water!” “糟啦!月亮掉在井里头啦!”</span><br><span class="line">“The moon is in the well.” “糟了,月亮掉在井里头了!”</span><br><span class="line">They look at the moon in the well and shout:他们看到井里的月亮,喊道：</span><br><span class="line">“The moon did fall into the well!Come on!Let’get it out!”</span><br><span class="line">And they join each other one by one down to the moon in the well.</span><br><span class="line">Just before they reach the moon,the oldest monkey raises his head and happens to see the moon in the sky,正好他们摸到月亮的时候,老猴子抬头发现月亮挂在天上呢</span><br><span class="line">He yells excitedly “Don’t be so foolish!The moon is still in the sky!”</span><br></pre></td></tr></table></figure>
+<h4 id="查找反向符合条件的行"><a href="#查找反向符合条件的行" class="headerlink" title="查找反向符合条件的行"></a>查找反向符合条件的行</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@iz2ze76ybn73dvwmdij06zz ~]# grep -v  moon monkey</span><br><span class="line">One day,a little monkey is playing by the well.一天,有只小猴子在井边玩儿.</span><br><span class="line">He looks in the well and shouts :它往井里一瞧,高喊道：</span><br><span class="line">An older monkeys runs over,takes a look,and says,一只大猴子跑来一看,说,</span><br><span class="line">And olderly monkey comes over.老猴子也跑过来.</span><br><span class="line">He is very surprised as well and cries out:他也非常惊奇,喊道：</span><br><span class="line">A group of monkeys run over to the well .一群猴子跑到井边来,</span><br><span class="line">“月亮掉在井里头啦!快来!让我们把它捞起来!”</span><br><span class="line">Then,the oldest monkey hangs on the tree up side down ,with his feet on the branch .</span><br><span class="line">然后,老猴子倒挂在大树上,</span><br><span class="line">And he pulls the next monkey’s feet with his hands.拉住大猴子的脚,</span><br><span class="line">All the other monkeys follow his suit,其他的猴子一个个跟着,</span><br><span class="line">它们一只连着一只直到井里.</span><br><span class="line">它兴奋地大叫：“别蠢了!月亮还好好地挂在天上呢!”</span><br></pre></td></tr></table></figure>
+<h4 id="直接查找符合条件的行数"><a href="#直接查找符合条件的行数" class="headerlink" title="直接查找符合条件的行数"></a>直接查找符合条件的行数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iz2ze76ybn73dvwmdij06zz ~]# grep -c  moon monkey</span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
+<h4 id="忽略大小写查找符合条件的行数"><a href="#忽略大小写查找符合条件的行数" class="headerlink" title="忽略大小写查找符合条件的行数"></a>忽略大小写查找符合条件的行数</h4><p>先来看一下直接查找的结果</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@iz2ze76ybn73dvwmdij06zz ~]# grep my monkey</span><br></pre></td></tr></table></figure>
+<h4 id="忽略大小写查看"><a href="#忽略大小写查看" class="headerlink" title="忽略大小写查看"></a>忽略大小写查看</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iz2ze76ybn73dvwmdij06zz ~]# grep -i my monkey</span><br><span class="line">“Oh!My god!The moon has fallen into the well!” “噢!我的天!月亮掉到井里头啦!”</span><br></pre></td></tr></table></figure>
+<h4 id="查找符合条件的行并输出行号"><a href="#查找符合条件的行并输出行号" class="headerlink" title="查找符合条件的行并输出行号"></a>查找符合条件的行并输出行号</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@iz2ze76ybn73dvwmdij06zz ~]# grep -n monkey monkey</span><br><span class="line"><span class="number">1</span>:One day,a little monkey is playing by the well.一天,有只小猴子在井边玩儿.</span><br><span class="line"><span class="number">4</span>:An older monkeys runs over,takes a look,and says,一只大猴子跑来一看,说,</span><br><span class="line"><span class="number">6</span>:And olderly monkey comes over.老猴子也跑过来.</span><br><span class="line"><span class="number">9</span>:A group of monkeys run over to the well .一群猴子跑到井边来,</span><br><span class="line"><span class="number">13</span>:Then,the oldest monkey hangs on the tree up side down ,with his feet on the branch .</span><br><span class="line"><span class="number">15</span>:And he pulls the next monkey’s feet with his hands.拉住大猴子的脚,</span><br><span class="line"><span class="number">16</span>:All the other monkeys follow his suit,其他的猴子一个个跟着,</span><br><span class="line"><span class="number">19</span>:Just before they reach the moon,the oldest monkey raises his head and happens to see the moon in the sky,正好他们摸到月亮的时候,老猴子抬头发现月亮挂在天上呢</span><br></pre></td></tr></table></figure>
+<h4 id="查找开头是J的行"><a href="#查找开头是J的行" class="headerlink" title="查找开头是J的行"></a>查找开头是J的行</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iz2ze76ybn73dvwmdij06zz ~]# grep &#x27;^J&#x27; monkey</span><br><span class="line">Just before they reach the moon,the oldest monkey raises his head and happens to see the moon in the sky,正好他们摸到月亮的时候,老猴子抬头发现月亮挂在天上呢</span><br></pre></td></tr></table></figure>
+<h4 id="查找结尾是呢的行"><a href="#查找结尾是呢的行" class="headerlink" title="查找结尾是呢的行"></a>查找结尾是呢的行</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iz2ze76ybn73dvwmdij06zz ~]# grep &quot;呢$&quot; monkey</span><br><span class="line">Just before they reach the moon,the oldest monkey raises his head and happens to see the moon in the sky,正好他们摸到月亮的时候,老猴子抬头发现月亮挂在天上呢</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sed"><a href="#Sed" class="headerlink" title="Sed"></a>Sed</h3><blockquote>
+<p>sed是一种流编辑器，是一款处理文本比较优秀的工具，可以结合正则表达式一起使用。</p>
+</blockquote>
+<h4 id="sed命令"><a href="#sed命令" class="headerlink" title="sed命令"></a>sed命令</h4><p>命令: sed<br>语法 : sed [选项]… {命令集} [输入文件]…</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">常用参数:</span><br><span class="line">            d  删除选择的行    </span><br><span class="line">            s   查找    </span><br><span class="line">            y  替换</span><br><span class="line">            i   当前行前面插入一行</span><br><span class="line">            a  当前行后面插入一行</span><br><span class="line">            p  打印行       </span><br><span class="line">            q  退出     </span><br><span class="line"></span><br><span class="line"> 替换符:</span><br><span class="line"></span><br><span class="line">            数字 ：替换第几处    </span><br><span class="line">            g :  全局替换    </span><br><span class="line">            \<span class="number">1</span>:  子串匹配标记，前面搜索可以用元字符集\(..\)</span><br><span class="line">            &amp;:  保留搜索刀的字符用来替换其他字符</span><br><span class="line">#### 操作</span><br><span class="line">##### 替换操作</span><br><span class="line">查看文件：</span><br><span class="line">```java</span><br><span class="line"># cat word</span><br><span class="line">Twinkle, twinkle, little star</span><br><span class="line">How I wonder what you are</span><br><span class="line">Up above the world so high</span><br><span class="line">Like a diamond in the sky</span><br><span class="line">When the blazing sun is gone</span><br></pre></td></tr></table></figure>
+<p>替换：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># sed &#x27;s/little/big/&#x27; word</span><br><span class="line">Twinkle, twinkle, big star</span><br><span class="line">How I wonder what you are</span><br><span class="line">Up above the world so high</span><br><span class="line">Like a diamond in the sky</span><br><span class="line">When the blazing sun is gone</span><br></pre></td></tr></table></figure>
+<p>查看文本：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># word1</span><br><span class="line">Oh <span class="keyword">if</span> there<span class="string">&#x27;s one thing to be taught</span></span><br><span class="line"><span class="string">it&#x27;</span>s dreams are made to be caught</span><br><span class="line">and friends can never be bought</span><br><span class="line">Doesn<span class="string">&#x27;t matter how long it&#x27;</span>s been</span><br><span class="line">I know you<span class="string">&#x27;ll always jump in</span></span><br><span class="line"><span class="string">&#x27;</span>Cause we don<span class="string">&#x27;t know how to quit</span></span><br></pre></td></tr></table></figure>
+<p>全局替换：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># sed &#x27;s/to/can/g&#x27; word1</span><br><span class="line">Oh <span class="keyword">if</span> there<span class="string">&#x27;s one thing can be taught</span></span><br><span class="line"><span class="string">it&#x27;</span>s dreams are made can be caught</span><br><span class="line">and friends can nev</span><br></pre></td></tr></table></figure>
+<p>按行替换（替换2到最后一行)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># sed &#x27;2,$s/to/can/&#x27; word1</span><br><span class="line">Oh <span class="keyword">if</span> there<span class="string">&#x27;s one thing to be taught</span></span><br><span class="line"><span class="string">it&#x27;</span>s dreams are made can be caught</span><br><span class="line">and friends can never be bought</span><br><span class="line">Doesn<span class="string">&#x27;t matter how long it&#x27;</span>s been</span><br><span class="line">I know you<span class="string">&#x27;ll always jump in</span></span><br><span class="line"><span class="string">&#x27;</span>Cause we don<span class="string">&#x27;t know how can quit</span></span><br><span class="line"><span class="string">```java</span></span><br><span class="line"><span class="string">##### 删除操作:</span></span><br><span class="line"><span class="string">查看文本:</span></span><br><span class="line"><span class="string">```java</span></span><br><span class="line"><span class="string"># cat word</span></span><br><span class="line"><span class="string">Twinkle, twinkle, little star</span></span><br><span class="line"><span class="string">How I wonder what you are</span></span><br><span class="line"><span class="string">Up above the world so high</span></span><br><span class="line"><span class="string">Like a diamond in the sky</span></span><br><span class="line"><span class="string">When the blazing sun is gone</span></span><br></pre></td></tr></table></figure>
+<p>删除:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># sed &#x27;2d&#x27; word</span><br><span class="line">Twinkle, twinkle, little star</span><br><span class="line">Up above the world so high</span><br><span class="line">Like a diamond in the sky</span><br><span class="line">When the blazing sun is gone</span><br></pre></td></tr></table></figure>
+<p>显示行号:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># sed &#x27;=;2d&#x27; word</span><br><span class="line"><span class="number">1</span></span><br><span class="line">Twinkle, twinkle, little star</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line">Up above the world so high</span><br><span class="line"><span class="number">4</span></span><br><span class="line">Like a diamond in the sky</span><br><span class="line"><span class="number">5</span></span><br><span class="line">When the blazing sun is gone</span><br></pre></td></tr></table></figure>
+<p>删除第2行到第四行:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># sed &#x27;=;2,4d&#x27; word</span><br><span class="line"><span class="number">1</span></span><br><span class="line">Twinkle, twinkle, little star</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line">When the blazing sun is gone</span><br></pre></td></tr></table></figure>
+<h5 id="添加行操作"><a href="#添加行操作" class="headerlink" title="添加行操作:"></a>添加行操作:</h5><p>向前插入:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># echo &quot;hello&quot; | sed &#x27;i\kitty&#x27;</span><br><span class="line">kitty</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+<p>向后插入:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># echo &quot;kitty&quot; | sed &#x27;i\hello&#x27;</span><br><span class="line">hello</span><br><span class="line">kitty</span><br></pre></td></tr></table></figure>
+<h5 id="修改行操作"><a href="#修改行操作" class="headerlink" title="修改行操作:"></a>修改行操作:</h5><p>替换第二行为hello kitty</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># sed &#x27;2c\hello kitty&#x27; word</span><br><span class="line">Twinkle, twinkle, little star</span><br><span class="line">hello kitty</span><br><span class="line">Up above the world so high</span><br><span class="line">Like a diamond in the sky</span><br><span class="line">When the blazing sun is gone</span><br></pre></td></tr></table></figure>
+<p>替换第二行到最后一行为hello kitty</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># sed &#x27;2,$c\hello kitty&#x27; word</span><br><span class="line">Twinkle, twinkle, little star</span><br><span class="line">hello kitty</span><br></pre></td></tr></table></figure>
+<h5 id="写入行操作"><a href="#写入行操作" class="headerlink" title="写入行操作"></a>写入行操作</h5><p>把带star的行写入c文件中,c提前创建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># sed -n &#x27;/star/w c&#x27; word</span><br><span class="line"># cat c</span><br><span class="line">Twinkle, twinkle, little star</span><br></pre></td></tr></table></figure>
+<h5 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h5><p>打印3行后，退出sed</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># sed &#x27;3q&#x27; word</span><br><span class="line">Twinkle, twinkle, little star</span><br><span class="line">How I wonder what you are</span><br><span class="line">Up above the world so higher be bought</span><br><span class="line">Doesn<span class="string">&#x27;t matter how long it&#x27;</span>s been</span><br><span class="line">I know you<span class="string">&#x27;ll always jump in</span></span><br><span class="line"><span class="string">&#x27;</span>Cause we don<span class="string">&#x27;t know how can quit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Awk"><a href="#Awk" class="headerlink" title="Awk"></a>Awk</h3><blockquote>
+<p>awk是一个强大的文本分析工具，相对于grep的查找，sed的编辑，awk在其对数据分析并生成报告时，显得尤为强大。简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。</p>
+</blockquote>
+<p>命令格式：<br>awk [option] ‘scrip’ var=value</p>
+<p>参数：<br>option：<br>-F 指定输入的分割字符，默认为 空格<br>-v var=value 赋值一个用户自定义变量<br>-f scripfile 从脚本中读取 awk 命令</p>
+<h4 id="AWK-模式和操作awk-脚本是由模式和操作组成的。"><a href="#AWK-模式和操作awk-脚本是由模式和操作组成的。" class="headerlink" title="AWK 模式和操作awk 脚本是由模式和操作组成的。"></a>AWK 模式和操作awk 脚本是由模式和操作组成的。</h4><h5 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h5><p>模式可以是以下任意一个：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/正则表达式/： 使用通配符的扩展集</span><br><span class="line">关系表达式：    使用运算符进行操作，可以是字符串或者数字比较测试</span><br><span class="line">模式匹配表达式：用运算符~<span class="number">9</span>匹配和~！（不匹配）</span><br><span class="line">BEGIN 语句块，pattern语句块、END语句块</span><br></pre></td></tr></table></figure>
+<h5 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h5><p>操作有一个或者多个命令、函数、表达式组成，之间由换行符或分号隔开，并位于大括号内、主要部分有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">变量或属组赋值</span><br><span class="line">输出命令</span><br><span class="line">内置函数</span><br><span class="line">控制流程语句</span><br></pre></td></tr></table></figure>
+<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><p>例： 只是显示最近登录的5个帐号</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# last -n 5 </span><br><span class="line">root     pts/<span class="number">0</span>        <span class="number">192.168</span>.<span class="number">116.1</span>    Fri Jun <span class="number">12</span> <span class="number">10</span>:<span class="number">59</span>   still logged in   </span><br><span class="line">reboot   system boot  <span class="number">3.10</span>.<span class="number">0</span>-<span class="number">862.</span>el7.x Fri Jun <span class="number">12</span> <span class="number">10</span>:<span class="number">58</span> - <span class="number">11</span>:<span class="number">36</span>  (<span class="number">00</span>:<span class="number">38</span>)    </span><br><span class="line">reboot   system boot  <span class="number">3.10</span>.<span class="number">0</span>-<span class="number">862.</span>el7.x Fri Jun  <span class="number">5</span> <span class="number">21</span>:<span class="number">07</span> - <span class="number">11</span>:<span class="number">36</span> (<span class="number">6</span>+<span class="number">14</span>:<span class="number">28</span>)   </span><br><span class="line">root     pts/<span class="number">0</span>        <span class="number">192.168</span>.<span class="number">116.1</span>    Fri Jun  <span class="number">5</span> <span class="number">18</span>:<span class="number">40</span> - crash  (<span class="number">02</span>:<span class="number">27</span>)    </span><br><span class="line">reboot   system boot  <span class="number">3.10</span>.<span class="number">0</span>-<span class="number">862.</span>el7.x Fri Jun  <span class="number">5</span> <span class="number">17</span>:<span class="number">28</span> - <span class="number">11</span>:<span class="number">36</span> (<span class="number">6</span>+<span class="number">18</span>:<span class="number">08</span>)   </span><br><span class="line"></span><br><span class="line">wtmp begins Thu Oct <span class="number">10</span> <span class="number">22</span>:<span class="number">36</span>:<span class="number">04</span> <span class="number">2019</span></span><br><span class="line">[root@localhost ~]# last -n 5 | awk &#x27;&#123;print $1&#125;&#x27;</span><br><span class="line">root</span><br><span class="line">reboot</span><br><span class="line">reboot</span><br><span class="line">root</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<p>例： 只显示/etc/passwd的账户</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat /etc/passwd | awk -F &#x27;:&#x27; &#x27;&#123;print $1&#125;&#x27;</span><br><span class="line">root</span><br><span class="line">bin</span><br><span class="line">daemon</span><br><span class="line">adm</span><br><span class="line">lp</span><br><span class="line">sync</span><br><span class="line">shutdown</span><br><span class="line">halt</span><br><span class="line">mail</span><br><span class="line">operator</span><br><span class="line">games</span><br><span class="line">ftp</span><br><span class="line">nobody</span><br><span class="line">systemd-network</span><br><span class="line">dbus</span><br><span class="line">polkitd</span><br><span class="line">tss</span><br><span class="line">sshd</span><br><span class="line">postfix</span><br><span class="line">chrony</span><br><span class="line">mysql</span><br></pre></td></tr></table></figure>
+<p>例：只显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以tab键分割</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat /etc/passwd | awk -F &#x27;:&#x27; &#x27;&#123;print $1&quot;\t&quot;$7&#125;&#x27; </span><br><span class="line">dbus    /sbin/nologin</span><br><span class="line">polkitd    /sbin/nologin</span><br><span class="line">tss    /sbin/nologin</span><br><span class="line">sshd    /sbin/nologin</span><br><span class="line">postfix    /sbin/nologin</span><br><span class="line">chrony    /sbin/nologin</span><br><span class="line">mysql    /bin/bash</span><br></pre></td></tr></table></figure>
+<p>例：只是显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以逗号分割,而且在所有行添加列名name,shell,在最后一行添加”blue,/bin/nosh”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat /etc/passwd | awk -F &#x27;:&#x27; &#x27;BEGIN &#123;print &quot;name,shell&quot;&#125; &#123;print $1&quot;\t&quot;$7&#125; END &#123;print &quot;Hello,/bin/nosh&quot;&#125;&#x27;</span><br><span class="line">dbus    /sbin/nologin</span><br><span class="line">polkitd    /sbin/nologin</span><br><span class="line">tss    /sbin/nologin</span><br><span class="line">sshd    /sbin/nologin</span><br><span class="line">postfix    /sbin/nologin</span><br><span class="line">chrony    /sbin/nologin</span><br><span class="line">mysql    /bin/bash</span><br><span class="line">Hello,/bin/nosh</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>awk工作流程是这样的：先执行BEGING，然后读取文件，读入有/n换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域,随后开始执行模式所对应的动作action。接着开始读入第二条记录······直到所有的记录都读完，最后执行END操作。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">第一步： 执行 BEGIN &#123;commond&#125; 指令</span><br><span class="line">第二步： 从文件或标准输入&#123;stdin&#125;读取一行然后执行 pattern &#123; commmod &#125; </span><br><span class="line">第三步； 从读至输入流末尾，执行 END &#123;commod&#125;语句</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>BEGIN 在awk 开始输入读取之前被执行，属于一个可选的模块，一般用于变量初始化、打印输出表头</p>
+<p>pattern 通用命令，是最重要的一块，属于可选的，一般用于打印出指定的列，如果没有指定 petter 模块，则默认执行 {print $0} 既打印出所有读取到的内容</p>
+<p>END 在 AWK 从输入流中读取完所有的内容之后再执行，在 awk 整个语句输入中末尾执行</p>
+</blockquote>
+<p>例：搜索 /etc/passwd 有 root 关键字的行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# awk -F: &#x27;/root/&#x27; /etc/passwd</span><br><span class="line">root:x:<span class="number">0</span>:<span class="number">0</span>:root:/root:/bin/bash</span><br><span class="line">operator:x:<span class="number">11</span>:<span class="number">0</span>:operator:/root:/sbin/nologin</span><br></pre></td></tr></table></figure>
+<p>例：搜索/etc/passwd有root关键字的所有行，并显示对应的shell</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# awk -F: &#x27;/root/&#123;print $7&#125;&#x27; /etc/passwd</span><br><span class="line">/bin/bash</span><br><span class="line">/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/10/k8s%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90Tocken%E5%B9%B6%E5%8A%A0%E5%85%A5%E9%9B%86%E7%BE%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Semaik.">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Semaik.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/10/k8s%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90Tocken%E5%B9%B6%E5%8A%A0%E5%85%A5%E9%9B%86%E7%BE%A4/" class="post-title-link" itemprop="url">k8s重新生成Tocken并加入集群</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-10 14:23:09 / 修改时间：14:26:33" itemprop="dateCreated datePublished" datetime="2020-09-10T14:23:09+08:00">2020-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+     # 
+     #
+          <h4 id="生成Token以及ca证书sha256hash值"><a href="#生成Token以及ca证书sha256hash值" class="headerlink" title="生成Token以及ca证书sha256hash值"></a>生成Token以及ca证书sha256hash值</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]# kubeadm token create --print-join-command </span><br><span class="line">W0710 <span class="number">09</span>:<span class="number">11</span>:<span class="number">07</span>.<span class="number">688855</span>   <span class="number">62169</span> configset.go:<span class="number">202</span>] WARNING: kubeadm cannot validate component configs <span class="keyword">for</span> API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]</span><br><span class="line">kubeadm join <span class="number">1.1</span>.<span class="number">1.5</span>:<span class="number">6443</span> --token <span class="number">1</span>cpem4.adim7zc1fqi4x1px     --discovery-token-ca-cert-hash sha256:<span class="number">9</span>c4f217b0a12781be5c49262aa58738f873e7e0037719eeb0adeb7293bcdc1ca </span><br></pre></td></tr></table></figure>
+<h4 id="如果之前怡景加入过集群需要关闭10250端口以及删除K8S目录"><a href="#如果之前怡景加入过集群需要关闭10250端口以及删除K8S目录" class="headerlink" title="如果之前怡景加入过集群需要关闭10250端口以及删除K8S目录"></a>如果之前怡景加入过集群需要关闭10250端口以及删除K8S目录</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@node3 ~]# rm -rf /etc/kubernetes/</span><br><span class="line">[root@node2 ~]# netstat -anpt | grep 10250</span><br><span class="line">tcp6       <span class="number">0</span>      <span class="number">0</span> :::<span class="number">10250</span>                :::*                    LISTEN      <span class="number">9992</span>/kubelet        </span><br><span class="line">[root@node2 ~]# kill -9 9992</span><br></pre></td></tr></table></figure>
+<h4 id="node加入集群"><a href="#node加入集群" class="headerlink" title="node加入集群"></a>node加入集群</h4><p>复制生成的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join <span class="number">1.1</span>.<span class="number">1.5</span>:<span class="number">6443</span> --token <span class="number">1</span>cpem4.adim7zc1fqi4x1px     --discovery-token-ca-cert-hash sha256:<span class="number">9</span>c4f217b0a12781be5c49262aa58738f873e7e0037719eeb0adeb7293bcdc1ca </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/10/Hexo%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Semaik.">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Semaik.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/10/Hexo%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE/" class="post-title-link" itemprop="url">Hexo添加分类和标签</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-10 13:21:18 / 修改时间：13:26:57" itemprop="dateCreated datePublished" datetime="2020-09-10T13:21:18+08:00">2020-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+     # 
+     #
+          <h4 id="1-创建”分类”选项"><a href="#1-创建”分类”选项" class="headerlink" title="1.创建”分类”选项"></a>1.创建”分类”选项</h4><p>生成“分类”页并添加tpye属性,进入博客目录。执行命令下方命令</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> page categories</span><br></pre></td></tr></table></figure>
+<p>categories文件夹下会有index.md这个文件，打开后默认内容是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: <span class="number">2019</span>-<span class="number">04</span>-<span class="number">22</span> <span class="number">14</span>:<span class="number">47</span>:<span class="number">40</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>添加type: “categories”到内容中，添加后是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line">title: 分类</span><br><span class="line">date: <span class="number">2019</span>-<span class="number">04</span>-<span class="number">24</span> <span class="number">15</span>:<span class="number">30</span>:<span class="number">30</span></span><br><span class="line">type: categories</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>保存并关闭文件。</p>
+<p>给文章添加“categories”属性</p>
+<p>打开需要添加分类的文章，为其添加categories属性。下方的categories:Hexo表示这篇文章添加到到“Hexo”这个分类。注意：一篇文章只会添加到一个分类中，如果是多个默认放到第一个分类中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 添加分类及标签</span><br><span class="line">date: <span class="number">2017</span>-<span class="number">05</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">12</span>:<span class="number">57</span></span><br><span class="line">categories: Hexo</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>至此，成功给文章添加分类，点击首页的“分类”可以看到该分类下的所有文章。当然，只有添加了categories: xxx的文章才会被收录到首页的“分类”中。</p>
+<h4 id="2-创建”标签”选项"><a href="#2-创建”标签”选项" class="headerlink" title="2.创建”标签”选项"></a>2.创建”标签”选项</h4><p>生成“标签”页并添加tpye属性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> page tags</span><br></pre></td></tr></table></figure>
+<p>在tags文件夹下，找到index.md这个文件，打开后默认内容是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: <span class="number">2019</span>-<span class="number">04</span>-<span class="number">22</span> <span class="number">14</span>:<span class="number">22</span>:<span class="number">08</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>添加type: “tags”到内容中，添加后是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: <span class="number">2019</span>-<span class="number">04</span>-<span class="number">24</span> <span class="number">15</span>:<span class="number">40</span>:<span class="number">24</span></span><br><span class="line">type: tags</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>保存并关闭文件。</p>
+<p>给文章添加“tags”属性,打开需要添加标签的文章，为其添加tags属性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 添加分类及标签</span><br><span class="line">date: <span class="number">2019</span>-<span class="number">04</span>-<span class="number">24</span> <span class="number">15</span>:<span class="number">40</span>:<span class="number">24</span></span><br><span class="line">categories: </span><br><span class="line">           - Hexo</span><br><span class="line">tags:</span><br><span class="line">           - 博客</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/10/Hexo%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Semaik.">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Semaik.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/10/Hexo%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0/" class="post-title-link" itemprop="url">Hexo如何发布文章</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-10 12:57:45 / 修改时间：13:12:18" itemprop="dateCreated datePublished" datetime="2020-09-10T12:57:45+08:00">2020-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+     # 
+     #
+          <h4 id="输入以下命令："><a href="#输入以下命令：" class="headerlink" title="输入以下命令："></a>输入以下命令：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/10/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Semaik.">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Semaik.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/10/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-10 09:31:08" itemprop="dateCreated datePublished" datetime="2020-09-10T09:31:08+08:00">2020-09-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+     # 
+     #
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Semaik."
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Semaik.</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/semaik" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;semaik" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zuxuan8@aliyun.com" title="E-Mail → mailto:zuxuan8@aliyun.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Semaik.</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
