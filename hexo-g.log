@@ -1,0 +1,9 @@
+INFO  Validating config
+INFO  Deploying: git
+INFO  Clearing .deploy_git folder...
+INFO  Copying files from public folder...
+INFO  Copying files from extend dirs...
+[master dca3f23] Site updated: 2020-09-13 15:27:48
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+INFO  Good bye
+INFO  Deploy done: git
