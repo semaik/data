@@ -2,7 +2,9 @@ title: 强制修改Linux系统的Root密码的办法
 author: Semaik.
 tags:
   - Linux
-categories: []
+categories:
+  - Linux
+  - ''
 date: 2020-09-18 16:17:00
 ---
 ##### 1.在Linux 的引导界面按 E 键来进入内核编辑界面
