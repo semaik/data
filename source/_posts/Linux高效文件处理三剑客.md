@@ -1,9 +1,8 @@
----
 title: Linux高效文件处理三剑客
-date: 2020-09-10 14:39:48
 categories: Linux
-tags: 
-    - Linux
+tags:
+  - Linux
+date: 2020-09-10 14:39:48
 ---
 > grep、sed、awk我们叫他们三剑客，掌握它们可以更好的运维，提升工作效率，即使不是运维，对我们处理数据都是非常方便的～就很多数据处理来讲，写程序肯定是也能处理的，但是远没有已经存在特定功能的命令更高效，我们只需要操作命令即可。通过本文可以讲解三剑客的一些基础知识和实用;
 
@@ -279,6 +278,22 @@ Doesn't matter how long it's been
 I know you'll always jump in
 'Cause we don't know how can quit
 ```
+##### 日常使用sed操作修改配置文件:
+查看原始数据
+```java
+[root@node2 ~]# cat /etc/ssh/sshd_config | grep Root
+# PermitRootLogin yes
+```
+操作指令
+```java
+[root@node2 ~]# sed -i '/PermitRootLogin/c\PermitRootLogin no'  /etc/ssh/sshd_config
+```
+查看修改后的数据
+```java
+[root@node2 ~]# cat /etc/ssh/sshd_config | grep Root
+PermitRootLogin no
+```
+
 
 ### Awk
 > awk是一个强大的文本分析工具，相对于grep的查找，sed的编辑，awk在其对数据分析并生成报告时，显得尤为强大。简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。

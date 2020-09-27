@@ -1,9 +1,12 @@
 title: Tomcat
 author: Semaik.
-date: 2020-09-18 19:02:09
 tags:
+  - 微服务
+categories:
+  - 微服务
+date: 2020-09-18 19:02:00
 ---
-###### Tomcat 是什么?
+##### Tomcat 是什么?
 Tomcat 由JAVA语言开发的Java容器，实现了对 Servlet 和 JSP 的支持，并提供了作为Web服务器的一些特有功能，Tomcat是一种类似于IIS、Apache Http的Web服务端程序， Tomcat 本身也内含了一个 HTTP 服务器，它也可以被视作一个单独的 Web 服务器。也就是Web容器。
 
 
@@ -26,7 +29,7 @@ JDK：JAVA开发工具包。
 
 >Jre：JAVA运行环境
 
-###### 部署tomcat
+##### 部署tomcat
 配置Java环境
 
 解压软件包
@@ -126,7 +129,7 @@ Pattern：指定日志文件的格式
 - %b：记录该请求相应的字节数
 - %D：记录该请求响应的时间，可以用来测试tomcat的性能
 ```
-###### Tomcat多实例
+##### Tomcat多实例
 > 通过修改不同tomcat结点的配置文件中的端口来启动不同的tomcat实例
 
 示例一：
@@ -163,3 +166,391 @@ echo wo shi shi li er > /usr/local/tomcat2/webapps/2/2.jsp
 ```
 访问：
 ![upload successful](/images/timg2.png)
+
+##### Tomcat多虚拟主机
+
+在hosts文件中添加域名
+```java
+# vim /etc/hosts
+```
+![upload successful](/images/pasted-41.png)
+
+再一个tomcat实例中添加多个Host模块，匹配多个站点目录供客户端访问
+
+修改server.xml主配置文件
+```java
+# vim /usr/local/tomcat/conf/server.xml
+```
+![upload successful](/images/pasted-42.png)
+```java
+<Host name="www.one.com" appBase="/one"></Host>		//客户端如果访问的url域名为www.one.com，则匹配的站点目录为/one
+        <Host name="www.two.com" appBase="/two">		//客户端如果访问的url域名为www.two.com，则匹配的站点目录为/two
+        </Host>
+```
+重启服务
+```java
+# sh /usr/local/tomcat/bin/shutdown.sh && sh /usr/local/tomcat/bin/startup.sh
+```
+创建站点目录/one和/two，并添加web应用
+```java
+# mkdir -p /one/o
+# echo one > /one/o/aa.jsp
+# mkdir -p /two/t
+# echo two > /two/t/bb.jsp
+```
+在默认的webapps站点目录下创建目录cc，并添加web应用
+```java
+# mkdir /usr/local/tomcat/webapps/three
+# echo nin ben ci fang wen de ye mian lai zi zhan dian mu lu wei webapps xia > /usr/local/tomcat/webapps/three/cc.jsp
+```
+验证：
+
+```java
+# curl www.one.com:8080/o/aa.jsp
+one
+# curl www.two.com:8080/t/bb.jsp
+two
+```
+访问www.three.com:8080/three/cc.jsp`（本次访问的url在配置文件中没有指定域名所对应的站点目录，所以访问该域名的内容来自tomcat默认的站点目录webapps下的three的web应用）`
+```java
+# curl www.three.com:8080/three/cc.jsp
+nin ben ci fang wen de ye mian lai zi zhan dian mu lu wei webapps xia
+```
+
+##### 自定义web应用的访问位置
+修改配置文件
+```java
+# vim /usr/local/tomcat/conf/server.xml
+```
+
+![upload successful](/images/pasted-44.png)
+> 如果客户端访问的url中域名为www.two.com则匹配到的站点目录为/two
+如果客户端访问的url中域名为www.two.com:8080/myself，则匹配的站点目录为/self
+
+重启服务
+```java
+# sh /usr/local/tomcat/bin/shutdown.sh && sh /usr/local/tomcat/bin/startup.sh
+
+```
+创建/self站点目录
+```java
+# mkdir /self
+# echo this is myself > /self/self.jsp
+```
+访问
+```java
+# curl www.two.com:8080/t/bb.jsp
+two
+# curl www.two.com:8080/myself/self.jsp
+myself
+```
+##### 编写内存测试页面
+```java
+mkdir /one/memtest
+vim /one/memtest/meminfo.jsp
+<%
+Runtime rtm = Runtime.getRuntime();		# 获取运行时间
+long mm = rtm.maxMemory()/1024/1024;	# 给JVM分配的最大内存
+long tm = rtm.totalMemory()/1024/1024;	# Java程序用掉的JVM内存
+long fm = rtm.freeMemory()/1024/1024;	# 给JVM分配完后剩余的内存
+
+out.println("memory info:<br>");
+out.println("jvm max memory:"+mm+"MB"+"<br>");
+out.println("jvm used:"+tm+"MB"+"<br>");
+out.println("system free:"+fm+"MB"+"<br>");
+out.println("can be used:"+(mm+fm-tm)+"MB"+"<br>");
+%>
+```
+访问测试：
+
+![upload successful](/images/pasted-45.png)
+
+##### 远程监控tomcat性能
+编写脚本
+```java
+# vim /usr/local/tomcat/bin/catalina.sh
+添加：（309行）
+JAVA_OPTS="$JAVA_OPTS -Djava.rmi.server.hostname=1.1.1.1"	# 指定被连接的主机的IP/主机名/域名
+JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.port=9000"	# 指定被连接的主机的端口
+JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.authenticate=true"	# 指定连接时使用的身份验证
+JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.ssl=false"	# 指定连接时使用的身份验证
+```
+
+![upload successful](/images/pasted-46.png)
+
+设置用于远程连接的用户和密码
+```
+# cp /usr/local/java/jre/lib/management/jmxremote.password.template /usr/local/java/jre/lib/management/jmxremote.password
+# vim  /usr/local/java/jre/lib/management/jmxremote.password
+取消注释：
+ 用户名		  密码
+monitorRole		123456
+controlRole		123456
+```
+
+对password文件提权
+```java
+# chmod 600 /usr/local/java/jre/lib/management/jmxremote.password
+```
+重启服务：
+```java
+sh /usr/local/tomcat/bin/shutdown.sh && /usr/local/tomcat/bin/startup.sh
+```
+
+![upload successful](/images/pasted-47.png)
+
+放行防火墙（不行就关闭防火墙）
+```java
+# firewall-cmd --add-port=8080/tcp
+# firewall-cmd --add-port=8005/tcp
+# firewall-cmd --add-port=8009/tcp
+# firewall-cmd --add-port=9000/tcp
+# setenforce 0
+```
+打开一台虚拟机（只需要部署JDK）
+
+远程连接
+
+jconsole
+
+![upload successful](/images/pasted-48.png)
+
+![upload successful](/images/pasted-49.png)
+
+![upload successful](/images/pasted-50.png)
+
+##### 自定义错误页面
+
+初次访问一个不存在的错误页面结果
+
+![upload successful](/images/pasted-51.png)
+修改web页面配置文件
+```java
+# vim /usr/local/tomcat/conf/web.xml
+添加：（117行）
+<error-page>
+        <error-code>404</error-code>
+        <location>/notfound.jsp</location>	# 指定错误页面的文件
+</error-page>
+```
+编写要返回给客户端的错误页面
+```java
+# vim /usr/local/tomcat/webapps/ROOT/notfound.jsp
+Not Found！
+```
+重启服务
+```java
+# cd /usr/local/tomcat/bin/
+# ./shutdown.sh
+# ./startup.sh
+```
+如提示报错：（显示地址被占用）
+
+![upload successful](/images/pasted-53.png)
+
+![upload successful](/images/pasted-54.png)
+
+直接杀死相关的进程号就OK！
+
+kill -9 50831
+
+再次关闭、启动就OK！
+
+测试访问：（访问一个不存在的页面）
+```java
+# curl 127.0.0.1:8080/zx.jsp
+Not Found!
+```
+
+##### 通过web页面来管理虚拟主机
+
+将打包好的web应用bdqnweb.war拷贝到宿主目录下
+
+![upload successful](/images/pasted-55.png)
+
+修改配置文件
+```java
+取消注释并设置可访问管理界面的用户（最后）
+# vim /usr/local/tomcat/conf/tomcat-users.xml
+<role rolename="admin-gui"/>	# 设置可以访问host-manager这个web应用的html的权限
+<role rolename="admin-script"/>	# 设置可以访问txt类型页面的权限
+<user username="aa" password="123.com" roles="admin-gui,admin-script"/>	# 添加用户aa密码为123.com，拥有admin-gui和admin-script两个权限
+```
+重启服务
+```java
+# sh /usr/local/tomcat/bin/shutdown.sh && sh /usr/local/tomcat/bin/startup.sh
+```
+验证
+
+>访问管理虚拟主机页面并添加虚拟主机
+```java
+firefox 127.0.0.1:8080/host-manager
+```
+
+![upload successful](/images/pasted-56.png)
+
+![upload successful](/images/pasted-57.png)
+
+![upload successful](/images/pasted-58.png)
+创建www.test.com域名所对应的站点目录，并添加web应用
+```java
+# mkdir -p /test/app1
+# echo www.test.com > /test/app1/test.jsp
+```
+修改hosts文件添加域名
+```java
+# echo "1.1.1.1 www.test.com" >> /etc/hosts
+```
+验证：
+```java
+# curl www.test.com:8080/app1/test.jsp
+www.test.com
+```
+设置允许其他地址访问`Host-manager管理界面`（`默认地址为127.0.0.1可访问`）
+
+><u>如果使用本机的物理IP访问**host-manager**管理界面是不可以访问的因为在配置文件中没有指定其他IP访问管理界面，所以在配置文件中可以指定其他IP允许访问管理界面</u>
+  
+```java
+vim /usr/local/tomcat/webapps/host-manager/META-INF/context.xml
+```
+
+![upload successful](/images/pasted-59.png)
+
+>在正则表达式里面“点”为任意所有的意思，所以在这里需要用“\”这个符号进行转义（`^.*$代表允许所有地址可访问`）
+
+重启服务
+```java
+# sh /usr/local/tomcat/bin/shutdown.sh && sh /usr/local/tomcat/bin/startup.sh
+
+```
+验证
+```java
+firefox 1.1.1.1:8080/host-manager
+```
+
+![upload successful](/images/pasted-60.png)
+
+![upload successful](/images/pasted-61.png)
+访问成功！！！
+
+><u>重启服务后在管理界面添加的虚拟主机域名会消失，因为重启后服务会读取配置文件中的数据，在管理界面添加的虚拟主机不记录在配置文件中，所以会消失，但是消失的虚拟主机所对应的数据还在，只是虚拟主机的域名不存在。</u>
+
+>访问manager控制界面（如果虚拟主机和发布web应用一起做的话一起修改tomcat-users配置文件，如果先做虚拟主机在做发布web应用中间在重启服务，虚拟主机就会消失，建议一起修改配置文件）
+
+在配置文件中3yy，p复制粘贴这三行并修改
+```java
+vim /usr/local/tomcat/conf/tomcat-users.xml
+<role rolename="manager-gui"/>	# 设置可以访问manager这个web应用的html权限
+<role rolename="manager-script"/>	# 设置可以访问txt类型页面的权限
+<user username="bb" password="123.com" roles="manager-gui,manager-script"/>	# 添加可以访问的用户bb，密码为123.聪明，拥有manager-gui和manager-script两个权限 
+```
+
+![upload successful](/images/pasted-62.png)
+重启服务
+```java
+# sh /usr/local/tomcat/bin/shutdown.sh && sh /usr/local/tomcat/bin/startup.sh
+```
+访问
+```java
+firefox 127.0.0.1:8080/manager
+```
+
+![upload successful](/images/pasted-63.png)
+###### 第一种发布web应用方式
+
+![upload successful](/images/pasted-64.png)
+
+![upload successful](/images/pasted-65.png)
+
+![upload successful](/images/pasted-68.png)
+**发布成功后顶部显示OK**
+
+![upload successful](/images/pasted-69.png)
+
+当然在tomcat的默认站点目录webapps下会生成一个bdqnweb应用
+
+![upload successful](/images/pasted-70.png)
+
+访问bdqnweb应用
+```java
+firefox 127.0.0.1:8080/bdqnweb/
+```
+
+![upload successful](/images/pasted-71.png)
+
+###### 第二种发布方式
+
+![upload successful](/images/pasted-72.png)
+**发布成功后顶部显示OK**
+
+
+![upload successful](/images/pasted-73.png)
+/hello不需要在webapps目录下提前创建，发布成功后会自动生成
+
+![upload successful](/images/pasted-74.png)
+访问
+```java
+# curl 127.0.0.1:8080/hello
+Hello World!
+```
+设置允许其他地址访问**manager**管理界面（`默认地址为127.0.0.1可访问`）
+修改配置文件
+```java
+vim /usr/local/tomcat/webapps/manager/META-INF/context.xml
+```
+
+![upload successful](/images/pasted-75.png)
+
+**（^.*$代表允许所有地址可访问）**
+
+重启服务
+```java
+# sh /usr/local/tomcat/bin/shutdown.sh && sh /usr/local/tomcat/bin/startup.sh
+```
+验证访问
+
+![upload successful](/images/pasted-76.png)
+
+
+![upload successful](/images/pasted-77.png)
+
+##### JVM常用内存优化参数
+```java
+# vim /usr/local/tomcat/bin/catalina.sh
+添加：
+JAVA_OPTS="-server -Xms512M -Xmx512M -XX:NewSize=300M -XX:OldSize=100M -XX:SurvivorRatio=2"
+-Xms512：指定JVM初始化分配的内存
+-Xmx512：指定JVM最大获取到的内存
+-XX:NewSize=300M：指定新生代的内存容量
+-XX:OldSize=100M：指定年老代的内存容量
+-XX:SurvivorRatio=2：指定Survivor与Eden的占比
+#-XX:PermSize：指定持久代的容量
+#-XX:PermMaxSize：指定持久代的最大容量
+#-XX:NewMaxSize：指定新生代的最大内存容量
+```
+指定线程池
+```java
+# vim /usr/local/tomcat/conf/server.xml
+修改：去掉注释（56行）
+指定线程池，名字为threadpool，最大可开启线程数量为150个，最下空闲进程数量4个
+    <Executor name="threadPool" namePrefix="catalina-exec-"
+        maxThreads="150" minSpareThreads="4"/>
+连接器引用指定名字对应的线程池
+    <Connector port="8080" protocol="HTTP/1.1"
+        executor="threadPool"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+```
+重启服务
+```java
+# sh /usr/local/tomcat/bin/shutdown.sh && sh /usr/local/tomcat/bin/startup.sh
+
+```
+验证访问
+```java
+# firefox www.new.com:8080/manager
+```
+
+![upload successful](/images/pasted-78.png)
+
+![upload successful](/images/pasted-79.png)
