@@ -1,7 +1,6 @@
 #!/bin/bash
-git add .	> /dev/null
-git commit  -m "file"	> /dev/null
-# git push -u origin master
+git add .	&> /dev/null
+git commit  -m "file"	&> /dev/null
 
 expect -c "
 set timeout 1
