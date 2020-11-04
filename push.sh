@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/expect
 git add .	&> /dev/null
 git commit  -m "file"	&> /dev/null
 
