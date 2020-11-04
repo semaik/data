@@ -1,4 +1,4 @@
-title: Dockerfile构建Ngxin镜像
+title: Dockerfile构建Nginx镜像
 author: Semaik.
 tags:
   - Docker

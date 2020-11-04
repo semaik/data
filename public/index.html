@@ -169,6 +169,220 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/03/Keepalived/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/123.jpg">
+      <meta itemprop="name" content="Semaik.">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Semaik.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/03/Keepalived/" class="post-title-link" itemprop="url">Keepalived</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-03 15:49:00" itemprop="dateCreated datePublished" datetime="2020-11-03T15:49:00+08:00">2020-11-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-04 09:58:37" itemprop="dateModified" datetime="2020-11-04T09:58:37+08:00">2020-11-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+     # 
+     #
+          <p>Keepalived：最初给LVS负载均衡集群中的服务节点提供健康检查功能，后来因为集成了VRRP协议，可以实现解决服务节点的单点故障，提高服务的可靠性，支持高可用集群的部署</p>
+<p>VRRP协议</p>
+<p>VRRP（虚拟路由冗余协议）：由多台物理路由器组成一台高性能的虚拟路由器，多个物理路由器之间通过优先级举出主节点，其它节点为从节点，从节点不工作只接收主节点发来的VRRP通告，主节点管理虚拟IP并对外提供服务，主节点定时给从节点发送VRRP通告，通告中包含着主节点的优先级，当从节点在计时器的时间到了之后接收不到主机点发送的VRRP通告时，就认为主节点不可用，此时，从节点就会根据优先级选举出新的主节点并接管虚拟IP对外提供服务，这个切换过程对于客户端来说是透明的，这样解决了单点故障，保证了服务的可用性</p>
+<p>无故ARP（免费ARP）：特点是arp广播包中源IP目的IP源MAC目的MAC都是发送方的，也就是都是虚拟IP和虚拟MAC，</p>
+<p>作用：</p>
+<p>1.可以检测是否有地址冲突</p>
+<p>2.可以更新终端设备的ARP缓存表</p>
+<h5 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a>实验环境：</h5><table>
+<thead>
+<tr>
+<th align="center">系统</th>
+<th align="center">IP</th>
+<th align="center">服务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Centos7.4</td>
+<td align="center">1.1.1.1</td>
+<td align="center">keepalived主</td>
+</tr>
+<tr>
+<td align="center">Centos7.4</td>
+<td align="center">1.1.1.2</td>
+<td align="center">keepalived备</td>
+</tr>
+<tr>
+<td align="center">Centos7.4</td>
+<td align="center">1.1.1.3</td>
+<td align="center">Nginx</td>
+</tr>
+<tr>
+<td align="center">Centos7.4</td>
+<td align="center">1.1.1.4</td>
+<td align="center">Nginx</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">1.1.1.111</td>
+<td align="center">VIP</td>
+</tr>
+<tr>
+<td align="center">Centos7.4</td>
+<td align="center">1.1.1.10</td>
+<td align="center">Client</td>
+</tr>
+</tbody></table>
+<h5 id="配置keepalived主"><a href="#配置keepalived主" class="headerlink" title="配置keepalived主"></a>配置keepalived主</h5><h6 id="使用yum安装keepalived服务"><a href="#使用yum安装keepalived服务" class="headerlink" title="使用yum安装keepalived服务"></a>使用yum安装keepalived服务</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum -y install keepalived</span><br></pre></td></tr></table></figure>
+<h6 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/keepalived/keepalived.conf</span><br><span class="line">global_defs &#123;			<span class="comment">//默认全局配置</span></span><br><span class="line">   notification_email &#123;		<span class="comment">//指定该keepalived节点故障时接收邮件的收信人</span></span><br><span class="line">     acassen<span class="meta">@firewall</span>.loc	</span><br><span class="line">     failover<span class="meta">@firewall</span>.loc	</span><br><span class="line">     sysadmin<span class="meta">@firewall</span>.loc	</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from Alexandre.Cassen<span class="meta">@firewall</span>.loc		<span class="comment">//keepalived故障时发送邮件的发信人</span></span><br><span class="line">   smtp_server <span class="number">192.168</span>.<span class="number">200.1</span>		<span class="comment">//指定邮件服务器的IP，stmp简单邮件传输协议，使用端口25</span></span><br><span class="line">   smtp_connect_timeout <span class="number">30</span>		<span class="comment">//与邮件服务器的连接超时时间，单位s，可以自定义</span></span><br><span class="line">   router_id master		<span class="comment">//该节点的唯一表示，用于发邮件时表示该节点，可以是主机名，也可以是自己指定的名字</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;		<span class="comment">//定义一个VRRP实例，处于同一个组中的节点使用的实例名字应该一致，默认使用名字VI_1</span></span><br><span class="line">    state MASTER		<span class="comment">//该节点的状态，MASTER为主，BACKUP为备，必须大写，但是只是用来标识节点状态，节点主备是由优先级决定的</span></span><br><span class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">ens33</span>		//指定主节点从那块网卡发送<span class="title">VRRP</span>通告</span></span><br><span class="line"><span class="class">    <span class="title">virtual_router_id</span> 51		//指定该实例所属的虚拟路由组的<span class="title">id</span>，属于同一个组的节点使用的<span class="title">id</span>应该相同，<span class="title">id</span>取值范围为0-255</span></span><br><span class="line"><span class="class">    <span class="title">priority</span> 100		//指定该节点的优先级，属于同一个组的节点优先级最高为主节点，取值范围为1-255，配置超过取值范围的值都默认视为100</span></span><br><span class="line"><span class="class">添加：<span class="title">nopreempt</span>		//将该节点设置为非抢占模式</span></span><br><span class="line"><span class="class">    <span class="title">advert_int</span> 1		//主节点每隔1<span class="title">s</span>发送一次<span class="title">VRRP</span>通告，时间可以自定义</span></span><br><span class="line"><span class="class">    <span class="title">authentication</span> </span>&#123;		<span class="comment">//配置主备节点之间的认证方式以及密码</span></span><br><span class="line">        auth_type PASS		<span class="comment">//认证类型，主备必须一致，有PASS和HA两种，PASS密码是明文的，HA是密文的</span></span><br><span class="line">        auth_pass <span class="number">1111</span>		<span class="comment">//认证密钥，主备必须一致，只识别前八位</span></span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;		<span class="comment">//配置虚拟IP，只有主节点才会拥有该地址，只能通过ip add查看，ifconfig是查看不到的</span></span><br><span class="line">        <span class="number">1.1</span>.<span class="number">1.111</span>/<span class="number">8</span>		<span class="comment">//与物理机IP同网段</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server <span class="number">1.1</span>.<span class="number">1.111</span> <span class="number">80</span> &#123;		<span class="comment">//指定LVS集群使用的虚拟IP以及端口</span></span><br><span class="line">    delay_loop <span class="number">6</span>		<span class="comment">//指定对服务节点进行健康检查的间隔时间</span></span><br><span class="line">    lb_algo rr 		<span class="comment">//该集群的使用的调度算法</span></span><br><span class="line">    lb_kind DR		<span class="comment">//该集群的调度模式</span></span><br><span class="line">    persistence_timeout <span class="number">0</span>		<span class="comment">//服务节点的连接时间，0表示为短链接</span></span><br><span class="line">    protocol TCP		<span class="comment">//集群中节点之间通过TCP协议通信</span></span><br><span class="line">    netmask <span class="number">255.0</span>.<span class="number">0.0</span>	<span class="comment">//VIP掩码</span></span><br><span class="line"></span><br><span class="line">	real_server <span class="number">1.1</span>.<span class="number">1.3</span> <span class="number">80</span> &#123;		<span class="comment">//向集群中添加服务节点</span></span><br><span class="line">   	weight <span class="number">1</span>		<span class="comment">//设置节点的权重，默认为1，如果权重为0则表示该节点不可用</span></span><br><span class="line">	   TCP_CHECK &#123;	<span class="comment">//启用TCP健康检查</span></span><br><span class="line">            connect_timeout <span class="number">1</span>		<span class="comment">//对服务节点做健康检查的连接超时时间，1s可以自定义</span></span><br><span class="line">            nb_get_retry <span class="number">3</span>		<span class="comment">//所健康检查的重试次数，可自定义</span></span><br><span class="line">            delay_before_retry <span class="number">1</span>		<span class="comment">//每次健康检查之间间隔时间，可自定义</span></span><br><span class="line">            connect_port <span class="number">80</span>		<span class="comment">//针对哪个端口进行TCP检查</span></span><br><span class="line">            &#125;</span><br><span class="line">	 &#125;</span><br><span class="line">	real_server <span class="number">1.1</span>.<span class="number">1.4</span> <span class="number">80</span> &#123;		</span><br><span class="line">   	weight <span class="number">1</span></span><br><span class="line">	   TCP_CHECK &#123;</span><br><span class="line">            connect_timeout <span class="number">3</span>	</span><br><span class="line">            nb_get_retry <span class="number">3</span>	</span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">            connect_port <span class="number">80</span></span><br><span class="line">            &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="将配置文件拷贝给keepalived备"><a href="#将配置文件拷贝给keepalived备" class="headerlink" title="将配置文件拷贝给keepalived备"></a>将配置文件拷贝给keepalived备</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># scp /etc/keepalived/keepalived.conf root@1.1.1.2:/etc/keepalived/keepalived.conf</span><br></pre></td></tr></table></figure>
+<h6 id="修改备的配置文件"><a href="#修改备的配置文件" class="headerlink" title="修改备的配置文件"></a>修改备的配置文件</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># vi /etc/keepalived/keepalived.conf</span><br><span class="line">router_id backup</span><br><span class="line">state BACKUP</span><br><span class="line">priority <span class="number">90</span></span><br></pre></td></tr></table></figure>
+<h6 id="启动主从的keepalived服务"><a href="#启动主从的keepalived服务" class="headerlink" title="启动主从的keepalived服务"></a>启动主从的keepalived服务</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># systemctl restart keepalived</span><br></pre></td></tr></table></figure>
+<h6 id="配置Nginx（两台同样步骤）"><a href="#配置Nginx（两台同样步骤）" class="headerlink" title="配置Nginx（两台同样步骤）"></a>配置Nginx（两台同样步骤）</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 配置虚拟IP</span><br><span class="line"># cd /etc/sysconfig/network-scripts/</span><br><span class="line"># cp ifcfg-lo ifcfg-lo:1</span><br><span class="line"># vi ifcfg-lo:1</span><br><span class="line">DEVICE=lo:<span class="number">1</span></span><br><span class="line">IPADDR=<span class="number">1.1</span>.<span class="number">1.111</span>	<span class="comment">//虚拟IP</span></span><br><span class="line">NETMASK=<span class="number">255.255</span>.<span class="number">255.255</span></span><br><span class="line">NAME=lo:<span class="number">1</span></span><br><span class="line"># 多余的删除</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以通过ifconfig命令来配置不过是临时IP重启失效</p>
+</blockquote>
+<blockquote>
+<p>ifconfig lo:1 1.1.1.111 netmask 255.255.255.255</p>
+</blockquote>
+<h6 id="重启网卡"><a href="#重启网卡" class="headerlink" title="重启网卡"></a>重启网卡</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure>
+<h6 id="修改系统内核文件"><a href="#修改系统内核文件" class="headerlink" title="修改系统内核文件"></a>修改系统内核文件</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/sysctl.conf</span><br><span class="line">net.ipv4.conf.lo.arp_ignore=<span class="number">1</span></span><br><span class="line">net.ipv4.conf.<span class="keyword">default</span>.arp_ignore=<span class="number">1</span>	</span><br><span class="line">net.ipv4.conf.all.arp_ignore=<span class="number">1</span></span><br><span class="line">net.ipv4.conf.lo.arp_announce=<span class="number">2</span></span><br><span class="line">net.ipv4.conf.<span class="keyword">default</span>.arp_announce=<span class="number">2</span></span><br><span class="line">net.ipv4.conf.all.arp_announce=<span class="number">2</span></span><br><span class="line"># sysctl -p</span><br></pre></td></tr></table></figure>
+<h6 id="修改web首页文件（第二台web改成NO-2）"><a href="#修改web首页文件（第二台web改成NO-2）" class="headerlink" title="修改web首页文件（第二台web改成NO.2）"></a>修改web首页文件（第二台web改成NO.2）</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># echo &quot;Wecom to nginx NO.1&quot; &gt; /usr/local/nginx/html/index.html</span><br></pre></td></tr></table></figure>
+<h6 id="放行防护墙"><a href="#放行防护墙" class="headerlink" title="放行防护墙"></a>放行防护墙</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># firewall-cmd --add-port=80/tcp --permanent</span><br><span class="line"># firewall-cmd --add-service=nginx --permanent</span><br><span class="line"># firewall-cmd --reload</span><br><span class="line"># setenforce 0</span><br></pre></td></tr></table></figure>
+<h6 id="客户端验证"><a href="#客户端验证" class="headerlink" title="客户端验证"></a>客户端验证</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># curl 1.1.1.111</span><br><span class="line">wecom to nginx NO.<span class="number">1</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/03/Linux%E7%8E%AF%E5%A2%83%E6%9B%B4%E6%96%B0Python3-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/123.jpg">
+      <meta itemprop="name" content="Semaik.">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Semaik.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/03/Linux%E7%8E%AF%E5%A2%83%E6%9B%B4%E6%96%B0Python3-8/" class="post-title-link" itemprop="url">Linux环境更新Python3.8</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-03 12:41:00 / 修改时间：13:13:26" itemprop="dateCreated datePublished" datetime="2020-11-03T12:41:00+08:00">2020-11-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+     # 
+     #
+          <h4 id="进入Python官网下载软件包：https-www-python-org-downloads"><a href="#进入Python官网下载软件包：https-www-python-org-downloads" class="headerlink" title="进入Python官网下载软件包：https://www.python.org/downloads/"></a>进入Python官网下载软件包：<a target="_blank" rel="noopener" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></h4><p><img src="/images/pasted-101.png" alt="upload successful"></p>
+<blockquote>
+<p>下载需要更新的软件包</p>
+</blockquote>
+<p><img src="/images/pasted-102.png" alt="upload successful"></p>
+<h4 id="我就拿3-8-5软件包举例"><a href="#我就拿3-8-5软件包举例" class="headerlink" title="我就拿3.8.5软件包举例"></a>我就拿3.8.5软件包举例</h4><h6 id="创建一个存储目录"><a href="#创建一个存储目录" class="headerlink" title="创建一个存储目录"></a>创建一个存储目录</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@one /]# mkdir /usr/local/python3-8</span><br></pre></td></tr></table></figure>
+<h6 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@one /]# yum install gcc libffi-devel zlib* openssl-devel</span><br></pre></td></tr></table></figure>
+<h6 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@one /]# unzip Python-3.8.5.zip</span><br><span class="line">[root@one /]# cd Python-3.8.5/</span><br><span class="line">[root@one Python-3.8.5]# ./configure --prefix=/usr/local/python3-8 &amp;&amp; make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h6 id="给予权限"><a href="#给予权限" class="headerlink" title="给予权限"></a>给予权限</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@one /]# chmod 777 /usr/local/python3-8/</span><br></pre></td></tr></table></figure>
+<h6 id="备份Python2的文件"><a href="#备份Python2的文件" class="headerlink" title="备份Python2的文件"></a>备份Python2的文件</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@one /]# cp /usr/bin/python /usr/bin/python2.bak</span><br><span class="line">[root@one /]# rm -rf /usr/bin/python</span><br></pre></td></tr></table></figure>
+<h6 id="将Python3的文件链接到-usr-bin-下"><a href="#将Python3的文件链接到-usr-bin-下" class="headerlink" title="将Python3的文件链接到/usr/bin/下"></a>将Python3的文件链接到/usr/bin/下</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@one /]# ln -s /usr/local/python3-8/bin/python3.8 /usr/bin/pyhton</span><br></pre></td></tr></table></figure>
+<h6 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h6><p><img src="/images/pasted-103.png" alt="upload successful"></p>
+<p><img src="/images/pasted-104.png" alt="upload successful"></p>
+<blockquote>
+<p>如果pip的版本未更换成3.8就需要手动操作了</p>
+</blockquote>
+<h6 id="如果Yum出现以下错误"><a href="#如果Yum出现以下错误" class="headerlink" title="如果Yum出现以下错误"></a>如果Yum出现以下错误</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@one /]# yum -y install openssl*</span><br><span class="line">  File <span class="string">&quot;/usr/bin/yum&quot;</span>, line <span class="number">30</span></span><br><span class="line">    except KeyboardInterrupt, e:</span><br><span class="line">                            ^</span><br><span class="line">SyntaxError: invalid syntax</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">总下载量：<span class="number">3.9</span> M</span><br><span class="line">Downloading packages:</span><br><span class="line">  File <span class="string">&quot;/usr/libexec/urlgrabber-ext-down&quot;</span>, line <span class="number">28</span></span><br><span class="line">    except OSError, e:</span><br><span class="line">                  ^</span><br></pre></td></tr></table></figure>
+<h6 id="以上报错需要修改yum解释器"><a href="#以上报错需要修改yum解释器" class="headerlink" title="以上报错需要修改yum解释器"></a>以上报错需要修改yum解释器</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@one /]# vi /usr/bin/yum</span><br><span class="line">[root@one /]# vi /usr/libexec/urlgrabber-ext-down</span><br><span class="line"># 都修改成同样的python2.7</span><br></pre></td></tr></table></figure>
+<p><img src="/images/pasted-105.png" alt="upload successful"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/13/Centos7%E9%83%A8%E7%BD%B2%E8%BD%BB%E9%87%8F%E7%BA%A7%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7pssh/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -849,173 +1063,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/27/Dockerfile%E6%9E%84%E5%BB%BANgxin%E9%95%9C%E5%83%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/123.jpg">
-      <meta itemprop="name" content="Semaik.">
-      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Semaik.">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/27/Dockerfile%E6%9E%84%E5%BB%BANgxin%E9%95%9C%E5%83%8F/" class="post-title-link" itemprop="url">Dockerfile构建Ngxin镜像</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-09-27 14:31:00 / 修改时间：14:46:52" itemprop="dateCreated datePublished" datetime="2020-09-27T14:31:00+08:00">2020-09-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-     # 
-     #
-          <h5 id="Dockerfile构建nginx镜像"><a href="#Dockerfile构建nginx镜像" class="headerlink" title="Dockerfile构建nginx镜像"></a>Dockerfile构建nginx镜像</h5><blockquote>
-<p>要求：dockerfile做nginx源码镜像。并且启动后容器后可以直接启动。</p>
-</blockquote>
-<p>首先拖入nginx的tar包到物理机路径，与Dockerfile文件放在同一目录</p>
-<p>编写Dockerfile</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim Dockerfile </span><br><span class="line">FROM centos  # 调用docker中已下载的centos镜像</span><br><span class="line">MAINTAINER FeiYi  # 作者名为FeiYi</span><br><span class="line"> 安装环境所需包</span><br><span class="line">RUN yum -y install net-tools iproute pcre-devel openssl-devel gcc gcc-c++ make zlib-devel elinks</span><br><span class="line">ADD nginx-1.11.1.tar.gz /usr/src  # 解压本地host中的nginx包到容器中的/usr/src目录</span><br><span class="line">ENV NGINX_DIR /usr/src/nginx-1.11.1 # 定义环境变量</span><br><span class="line">WORKDIR $NGINX_DIR  # 进入容器中的解压目录</span><br><span class="line"> 编译安装</span><br><span class="line">RUN ./configure --prefix=/usr/local/nginx --user=nginx --group=nginx &amp;&amp; make &amp;&amp; make install</span><br><span class="line"> 回到根目录</span><br><span class="line">WORKDIR /</span><br><span class="line"> 创建程序用户</span><br><span class="line">RUN useradd nginx</span><br><span class="line"> 优化命令环境</span><br><span class="line">RUN ln -s /usr/local/nginx/sbin/nginx /usr/sbin/nginx</span><br><span class="line"> 监听端口<span class="number">80</span></span><br><span class="line">EXPOSE <span class="number">80</span></span><br><span class="line"> 后台启动nginx服务</span><br><span class="line">CMD [<span class="string">&quot;nginx&quot;</span>, <span class="string">&quot;-g&quot;</span>, <span class="string">&quot;daemon off;&quot;</span>]</span><br></pre></td></tr></table></figure>
-<p>使用Dockerfile构建镜像</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker build -t chai/centos-nginx-start /root/</span><br><span class="line">Successfully built c7efa3d71211</span><br><span class="line">Successfully tagged chai/centos-nginx-start:latest</span><br></pre></td></tr></table></figure>
-<p>使用构建完成的镜像实例化一个容器，验证80端口是否启用</p>
-<p>因为我们最后使用CMD去启动nginx，所以docker run后直接加/bin/bash会替代nginx启动的执行。所以使用以下方法进入容器</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker run -itd --name nginxtest chai/centos-nginx-start</span><br><span class="line">da7fe6d1541751dd86078848bf46c532cca9efb40832271bbf02c0eb7a25a1f8</span><br><span class="line">[root@localhost ~]# docker exec -it nginxtest /bin/bash</span><br><span class="line">[root@da7fe6d15417 /]# netstat -anpt | grep 80</span><br><span class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">80</span>              <span class="number">0.0</span>.<span class="number">0.0</span>:*               LISTEN      <span class="number">1</span>/nginx: master pro</span><br></pre></td></tr></table></figure>
-<p>查看ip并访问页面</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># ip为172.17.0.3</span><br><span class="line">[root@localhost ~]# curl -I 172.17.0.3</span><br><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</span><br><span class="line">Server: nginx/<span class="number">1.11</span>.<span class="number">1</span></span><br><span class="line">Date: Fri, <span class="number">27</span> Mar <span class="number">2020</span> <span class="number">07</span>:<span class="number">08</span>:<span class="number">49</span> GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: <span class="number">612</span></span><br><span class="line">Last-Modified: Fri, <span class="number">27</span> Mar <span class="number">2020</span> <span class="number">06</span>:<span class="number">58</span>:<span class="number">35</span> GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ETag: <span class="string">&quot;5e7da41b-264&quot;</span></span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/27/Dockerfile%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/123.jpg">
-      <meta itemprop="name" content="Semaik.">
-      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Semaik.">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/27/Dockerfile%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Dockerfile文件语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-09-27 14:20:00 / 修改时间：14:43:54" itemprop="dateCreated datePublished" datetime="2020-09-27T14:20:00+08:00">2020-09-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-     # 
-     #
-          <h5 id="Dockerfile文件编写格式："><a href="#Dockerfile文件编写格式：" class="headerlink" title="Dockerfile文件编写格式："></a>Dockerfile文件编写格式：</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">FROM  # 指定base镜像</span><br><span class="line">MAINTAINER # 指定镜像作者，后面根任意字符串</span><br><span class="line">COPY # 把文件从host复制到镜像内</span><br><span class="line">  COPY src dest</span><br><span class="line">  COPY [<span class="string">&quot;src&quot;</span>,<span class="string">&quot;dest&quot;</span>]</span><br><span class="line">  src:只能是文件</span><br><span class="line">ADD # 用法和COPY一样，唯一不同时src可以是压缩包，表示解压缩到dest位置，src也可以是目录</span><br><span class="line">ENV # 设置环境变量可以被接下来的镜像层引用，并且会加入到镜像中</span><br><span class="line">  ENV MY_VERSION <span class="number">1.3</span></span><br><span class="line">  RUN yum -y install http-$MY_VERSION</span><br><span class="line">  # 当进入该镜像的容器中echo $MY_VERSION会输出1.3</span><br><span class="line">EXPOSE # 指定容器中的进程监听的端口（接口），会在docker ps -a中的ports中显示</span><br><span class="line">  EXPOSE <span class="number">80</span></span><br><span class="line">VOLUME # 容器卷，后面会讲到，把host的路径mount到容器中</span><br><span class="line">  VOLUME /root/htdocs /usr/local/apahce2/htdocs</span><br><span class="line">WORKDIR # 为后续的镜像层设置工作路径</span><br><span class="line">        # 如果不设置，Dockerfile文件中的每一条命令都会返回到初始状态</span><br><span class="line">        # 设置一次后，会一直在该路经执行之后的分层，需要WORKDIR /回到根目录</span><br><span class="line">CMD # 启动容器后默认运行的命令，使用构建完成的镜像实例化为容器时，进入后默认执行的命令</span><br><span class="line">    # 这个命令会被docker run启动命令替代</span><br><span class="line">    # 如：docker -it --rm centos echo &quot;hello&quot;</span><br><span class="line">    # echo &quot;hello&quot;会替代CMD运行的命令</span><br><span class="line">  CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off&quot;]  # 该镜像实例化后的容器，进入后运行nginx启动服务</span><br><span class="line">ENTRYPOINT # 容器启动时运行的命令，不会被docker run的启动命令替代</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/pasted-80.png" alt="upload successful"></p>
-<p><strong>镜像的命名规则：</strong></p>
-<p>image name = 镜像站地址+作者命名+服务名称:标签</p>
-<h5 id="Dockerfile文件排错方法"><a href="#Dockerfile文件排错方法" class="headerlink" title="Dockerfile文件排错方法"></a>Dockerfile文件排错方法</h5><p>当个构建镜像时Dockerfile中报错，先来制作一个错误的Dockerfile</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim Dockerfile</span><br><span class="line">FROM busybox</span><br><span class="line">RUN touch tmpfile</span><br><span class="line">RUN /bin/bash -c echo <span class="string">&quot;continue to build...&quot;</span></span><br><span class="line">COPY testfile /</span><br></pre></td></tr></table></figure>
-<p>使用这个Dockerfile去构建镜像</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker build -t testerror /root</span><br><span class="line">Sending build context to Docker daemon  <span class="number">4.336</span>MB</span><br><span class="line">Step <span class="number">1</span>/<span class="number">4</span> : FROM busybox</span><br><span class="line"> ---&gt; <span class="number">83</span>aa35aa1c79</span><br><span class="line">Step <span class="number">2</span>/<span class="number">4</span> : RUN touch tmpfile</span><br><span class="line"> ---&gt; Running in <span class="number">41</span>a8dad29cd6</span><br><span class="line">Removing intermediate container <span class="number">41</span>a8dad29cd6</span><br><span class="line"> ---&gt; <span class="number">8</span>cd5c9a720bb</span><br><span class="line">Step <span class="number">3</span>/<span class="number">4</span> : RUN /bin/bash -c echo <span class="string">&quot;continue to build...&quot;</span></span><br><span class="line"> ---&gt; Running in bc1849fa8144</span><br><span class="line">/bin/sh: /bin/bash: not found</span><br><span class="line">The command <span class="string">&#x27;/bin/sh -c /bin/bash -c echo &quot;continue to build...&quot;&#x27;</span> returned a non-zero code: <span class="number">127</span></span><br></pre></td></tr></table></figure>
-<p>发现构建镜像过程中出现了报错<code>/bin/sh: /bin/bash: not found</code></p>
-<p>可以看到报错信息是从第三步才开始的，说明前两步是没有问题的，可以通过进入前两步最后结束的镜像id中去查看错误，进入前两层的镜像id是一个正常的容器环境，将第三步无法执行的命令，在容器中运行，将会看到真正的错误是没有<code>/bin/bash</code>这个环境</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker run -it  8cd5c9a720bb</span><br><span class="line">/ # /bin/bash -c echo &quot;continue to build...&quot;</span><br><span class="line">sh: /bin/bash: not found</span><br></pre></td></tr></table></figure>
-<p>因为构建这个镜像使用的是busybox，它使用的环境是<code>/bin/sh</code></p>
-<p>修改后，重新构建成功</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker build -t testerror /root</span><br><span class="line">Successfully built ae5870fff063</span><br><span class="line">Successfully tagged testerror:latest</span><br></pre></td></tr></table></figure>
-<p>运行容器后，可以看到创建的tmpfile和复制testfile</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker run -it testerror </span><br><span class="line">/ # ls</span><br><span class="line">bin       etc       proc      sys       tmp       usr</span><br><span class="line">dev       home      root      testfile  tmpfile   <span class="keyword">var</span></span><br></pre></td></tr></table></figure>
-<h5 id="镜像构建过程"><a href="#镜像构建过程" class="headerlink" title="镜像构建过程"></a>镜像构建过程</h5><p>在构建命令执行时输出的一大堆信息中，是执行Dockerfile中的每一行，最关键的几行信息如下</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Step 1/5 : FROM centos  # 调用centos</span><br><span class="line"> 5e35e350aded   # centos镜像id</span><br><span class="line">  </span><br><span class="line">Step <span class="number">2</span>/<span class="number">5</span> : RUN yum install httpd -y</span><br><span class="line"> Running in a16ddf07c140  # 运行一个临时容器来执行install httpd</span><br><span class="line">Removing intermediate container a16ddf07c140  # 完成后删除临时的容器id</span><br><span class="line"> b51207823459  # 生成一个镜像</span><br><span class="line">  </span><br><span class="line">Step <span class="number">3</span>/<span class="number">5</span> : RUN yum install net-tools -y</span><br><span class="line"> Running in 459c8823018a # 运行一个临时容器执行install net-tools</span><br><span class="line">Removing intermediate container 459c8823018a # 完成后删除临时容器id</span><br><span class="line"> 5b6c30a532d4  # 再生成一个镜像</span><br><span class="line"> </span><br><span class="line">Step <span class="number">4</span>/<span class="number">5</span> : RUN yum install elinks -y</span><br><span class="line"> Running in a2cb490f9b2f  # 运行一个临时容器执行install elinks</span><br><span class="line">Removing intermediate container a2cb490f9b2f # 完成后删除临时容器id</span><br><span class="line"> 24ba4735814b # 生成一个镜像</span><br><span class="line"> </span><br><span class="line">Step <span class="number">5</span>/<span class="number">5</span> : CMD [<span class="string">&quot;/bin/bash&quot;</span>]</span><br><span class="line"> Running in 792333c88ba8  # 运行临时容器，执行/bin/bash</span><br><span class="line">Removing intermediate container 792333c88ba8  # 完成后删除临时容器id</span><br><span class="line"> 09266c896243  # 生成镜像</span><br><span class="line">Successfully built 09266c896243  # 最终成功后的镜像id就是最后生成的镜像id</span><br></pre></td></tr></table></figure>
-<p>每一步生成一个镜像，都属于一个<code>docker commit</code>的执行结果</p>
-<p>在这个过程中一共生成了三个镜像层，都会被存储在graph中，包括层与层之间的关系，查看docker images中生成的镜像id是否为最后生成的镜像id，<code>FROM</code>和<code>CMD</code>都不算做镜像层</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker images</span><br><span class="line">REPOSITORY             TAG       IMAGE ID       CREATED          SIZE</span><br><span class="line">chai/centos-http-net   latest    <span class="number">09266</span>c896243   <span class="number">10</span> seconds ago   <span class="number">581</span>MB</span><br></pre></td></tr></table></figure>
-<p>通过<code>docker history</code>也可以看到简单的构建过程，这几个过程的size容量加起来也就是最终生成镜像的大小，也可将这里的镜像id和上面过程中的id进行对比，我们所看到的是三个yum就是形成的三个镜像层</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker history chai/centos-http-net:latest </span><br><span class="line">IMAGE         CREATED          CREATED BY                                      SIZE    COMMENT</span><br><span class="line">09266c896243  17 minutes ago   /bin/sh -c #(nop)  CMD [&quot;/bin/bash&quot;]            0B                  </span><br><span class="line"><span class="number">24</span>ba4735814b  <span class="number">17</span> minutes ago   /bin/sh -c yum install elinks -y                <span class="number">121</span>MB               </span><br><span class="line"><span class="number">5</span>b6c30a532d4  <span class="number">18</span> minutes ago   /bin/sh -c yum install net-tools -y             <span class="number">112</span>MB               </span><br><span class="line">b51207823459  <span class="number">18</span> minutes ago   /bin/sh -c yum install httpd -y                 <span class="number">145</span>MB               </span><br><span class="line">5e35e350aded  4 months ago     /bin/sh -c #(nop)  CMD [&quot;/bin/bash&quot;]            0B                  </span><br><span class="line">&lt;missing&gt;     4 months ago     /bin/sh -c #(nop)  LABEL org.label-schema.sc…   0B                  </span><br><span class="line">&lt;missing&gt;     4 months ago     /bin/sh -c #(nop) ADD file:45a381049c52b5664…   203MB</span><br></pre></td></tr></table></figure>
-<p><img src="/images/pasted-81.png" alt="upload successful"></p>
-<p><img src="/images/pasted-82.png" alt="upload successful"></p>
-<p><img src="/images/pasted-83.png" alt="upload successful"></p>
-<p><img src="/images/pasted-84.png" alt="upload successful"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1087,7 +1134,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
